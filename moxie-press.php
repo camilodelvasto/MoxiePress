@@ -92,6 +92,7 @@ function register_movie_custom_fields(){
     );
   }
 
+  // write the html for the editor
   function moxie_movies_html( $post) {
     wp_nonce_field( '_moxie_movies_nonce', 'moxie_movies_nonce' ); ?>
 
@@ -116,20 +117,21 @@ function register_movie_custom_fields(){
     <p>
       <label for="moxie_movies_year"><b><?php _e( 'Year', TEXT_DOMAIN ); ?></b></label><br>
       <i>The year the movie was published</i></label><br>
-      <select name="moxie_movies_year" id="moxie_movies_year">
-        <option <?php echo (moxie_movies_get_meta( 'moxie_movies_year' ) === '2016' ) ? 'selected' : '' ?>>2016</option>
-        <option <?php echo (moxie_movies_get_meta( 'moxie_movies_year' ) === '2015' ) ? 'selected' : '' ?>>2015</option>
-        <option <?php echo (moxie_movies_get_meta( 'moxie_movies_year' ) === '1999' ) ? 'selected' : '' ?>>1999</option>
+      <select name="moxie_movies_year" id="moxie_movies_year"> <?php
+        for($year = 2016; $year > 1900; $year--){ ?>
+          <option <?php echo (moxie_movies_get_meta( 'moxie_movies_year' ) === $year ) ? 'selected' : '' ?>><?php echo $year ?></option><?php;
+        } ?>
       </select>
     </p>
 
     <p>
       <label for="moxie_movies_description"><b><?php _e( 'Description', TEXT_DOMAIN ); ?></b><br>
       <i>Short description. Accepts HTML tags.</i></label><br>
-      <textarea name="moxie_movies_description" id="moxie_movies_description" ><?php echo moxie_movies_get_meta( 'moxie_movies_description' ); ?></textarea>
+      <textarea name="moxie_movies_description" id="moxie_movies_description" cols="50"><?php echo moxie_movies_get_meta( 'moxie_movies_description' ); ?></textarea>
     </p><?php
   }
 
+  // save custom fields
   function moxie_movies_save( $post_id ) {
     if ( defined( 'DOING_AUTOSAVE' ) && DOING_AUTOSAVE ) return;
     if ( ! isset( $_POST['moxie_movies_nonce'] ) || ! wp_verify_nonce( $_POST['moxie_movies_nonce'], '_moxie_movies_nonce' ) ) return;
@@ -145,8 +147,6 @@ function register_movie_custom_fields(){
       update_post_meta( $post_id, 'moxie_movies_description', esc_attr( $_POST['moxie_movies_description'] ) );
   }
   add_action( 'save_post', 'moxie_movies_save' );
-
-
 
 }
 
