@@ -15,6 +15,7 @@ Text Domain:  moxie-press
 
 // initialize plugin
 add_action( 'init', 'register_cpt_movie_collection' );
+add_action( 'add_meta_boxes', 'register_movie_meta_boxes' );
 
 // register cpt
 function register_cpt_movie_collection() {
@@ -24,11 +25,11 @@ function register_cpt_movie_collection() {
 
   // set default labels and args for this cpt
   $labels = array(
-    'name'               => _x( 'Movies', 'post type general name', $text_domain ),
-    'singular_name'      => _x( 'Movie', 'post type singular name', $text_domain ),
-    'menu_name'          => _x( 'MoxieMovies', 'admin menu', $text_domain ),
-    'name_admin_bar'     => _x( 'Movie', 'add new on admin bar', $text_domain ),
-    'add_new'            => _x( 'Add New', 'Movie', $text_domain ),
+    'name'               => _x( 'Movies', 'movie', $text_domain ),
+    'singular_name'      => _x( 'Movie', 'movie', $text_domain ),
+    'menu_name'          => _x( 'MoxieMovies', 'movie', $text_domain ),
+    'name_admin_bar'     => _x( 'Movie', 'movie', $text_domain ),
+    'add_new'            => _x( 'Add New', 'movie', $text_domain ),
     'add_new_item'       => __( 'Add New Movie', $text_domain ),
     'new_item'           => __( 'New Movie', $text_domain ),
     'edit_item'          => __( 'Edit Movie', $text_domain ),
@@ -48,15 +49,19 @@ function register_cpt_movie_collection() {
     'show_ui'            => true,
     'show_in_menu'       => true,
     'query_var'          => true,
-    'rewrite'            => array( 'slug' => 'movie' ),
+    'rewrite'            => array( 'slug' => 'movies' ),
     'capability_type'    => 'post',
     'has_archive'        => true,
     'hierarchical'       => false,
     'menu_position'      => null,
-    'supports'           => array( 'title', 'editor', 'author', 'thumbnail', 'excerpt', 'comments' )
+    'supports'           => array( 'title', 'thumbnail', 'excerpt' )
   );
 
-  register_post_type( 'movie_review', $args );
+  // register this cpt & flush rewrite rules
+  register_post_type( 'movie', $args );
+  flush_rewrite_rules();
+
 }
+
 
 ?>
