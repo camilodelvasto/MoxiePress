@@ -41,17 +41,17 @@ function moxie_press_endpoint_data() {
     $movie_query = new WP_Query( $args );
     if ( $movie_query->have_posts() ) : while ( $movie_query->have_posts() ) : $movie_query->the_post();
       $id = get_the_ID();
-      $movie_data[] = array( 'data' => array(
+      $movie_data[] = array(
           'id' => $id,
           'title' => get_the_title(),
-          'poster_url'  => get_post_meta($id, 'moxie_press_poster_url'),
-          'rating'  => get_post_meta($id, 'moxie_press_rating'),
-          'year'  => get_post_meta($id, 'moxie_press_year'),
-          'short_description'  => get_post_meta($id, 'moxie_press_description'),
-      ));
+          'poster_url'  => get_post_meta($id, 'moxie_press_poster_url',true),
+          'rating'  => get_post_meta($id, 'moxie_press_rating',true),
+          'year'  => get_post_meta($id, 'moxie_press_year',true),
+          'short_description'  => get_post_meta($id, 'moxie_press_description',true),
+      );
     endwhile; wp_reset_postdata(); endif;
  
-    wp_send_json( $movie_data );
+    wp_send_json( array('data' => $movie_data) );
  
 }
 add_action( 'template_redirect', 'moxie_press_endpoint_data' );
