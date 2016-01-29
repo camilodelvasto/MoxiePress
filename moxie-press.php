@@ -15,6 +15,9 @@ Text Domain:  moxie-press
 
 
 // initialize plugin
+$dir = dirname(__FILE__);
+@include_once "$dir/includes/json-api.php";
+
 add_action( 'init', 'moxie_press_register_cpt_movie_collection' );
 add_action( 'init', 'moxie_press_register_movie_custom_fields' );
 
