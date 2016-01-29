@@ -1,7 +1,7 @@
 <?php /*
 **************************************************************************
 
-File:         json-api.php
+File:         includes/json-api.php
 What it does: creates an api endpoint for custom field "Movies" under /movies.json && /movies.json/movie-slug
 **************************************************************************/
 
