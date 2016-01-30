@@ -67,9 +67,7 @@ $cardh1: 200px;
     border-radius: 5px;
     padding: 5px;
     margin: 10px 0;
-    float: left;
     text-decoration: none;
-    display: none;
   }
   a.button:hover {
     background: rgba(40, 50, 80, 0.8);
@@ -169,8 +167,8 @@ $cardh1: 200px;
   }
 
   .grid-item--gigante {
-    height: 300px;
-    min-width: 334px;
+    height: 500px;
+    min-width: 354px;
   }
   .grid-item--gigante .card-content {
     min-width: 314px;
