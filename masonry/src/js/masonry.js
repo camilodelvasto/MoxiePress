@@ -13,7 +13,7 @@ $(document).ready(function(){
   (function initialize(){
     // get movie data and display Movie collection
     getPosts('',displayMovieCollection);
-    createGrid();
+    console.log('initializing');
   })();
 
   function getPosts(query, callback){
@@ -44,10 +44,17 @@ $(document).ready(function(){
     var html    = template(context);
 
     $('.moxie_press_container').append(html).fadeIn();
+    updateGrid(); // activate masonry when finished
 
   }
 
-
+  function updateGrid(){
+    $('.grid').masonry({
+      // options
+      itemSelector: '.grid-item',
+      columnWidth: 200
+    });
+  }
 
 });
 
