@@ -12,8 +12,20 @@ $(document).ready(function(){
 
   // initialize: get posts and displays them
   (function initialize(){
+
+    // render container template
+    var template = Handlebars.compile($("#moxie-template-container").html());
+    $('.moxie_press_container').append(template());
+
     // get movie data and display Movie collection
     getPosts('',displayMovieCollection);
+
+    // listen to controls
+    $('#filter').click(function(e){
+      e.preventDefault();
+      filterPosts('',displayMovieCollection);
+    })
+
   })();
 
   function getPosts(query, callback){
@@ -35,33 +47,26 @@ $(document).ready(function(){
 
   // display movie collection using provided (filtered) data and movie template
   function displayMovieCollection(data){
-    var source   = $("#moxie-press").html();
-    var template = Handlebars.compile(source);
+    //render template using movie collection from data
+    var template = Handlebars.compile($("#moxie-template-movie").html());
+    $('#moxie-grid').fadeOut(0).html(template(data)).fadeIn();
 
-    var html    = template(data);
-
-    $('.moxie_press_container').html(html).fadeIn();
-    updateGrid(updateImage); // activate masonry when finished
+    updateGrid(); // activate masonry when finished
 
   }
 
-  function updateGrid(callback){
+  function updateGrid(){
+    // layout items again and define click handler
+    if (grid !== undefined) {
+      grid.masonry('destroy');
+      grid.unbind('click');
+    }
     grid = $('.grid').masonry({
-      // options
       itemSelector: '.grid-item',
-      columnWidth: 180
-    });
-    return callback();
-  }
-
-
-  // update the background-image preoperty for every item in the grid
-  function updateImage(){
-    $('.grid-item').each(function(index, element){
-      if($(element).data("img").length !== 0) $(element).css('background-image','url(' + $(element).data("img") + ')');
+      columnWidth: 160
     });
 
-    // enable clicking a card to make it giant
+    // click handler
     grid.on( 'click', '.grid-item', function() {
       $('.grid').children('.grid-item').not(this).removeClass('grid-item--gigante');
       $( this ).toggleClass('grid-item--gigante');
@@ -74,20 +79,17 @@ $(document).ready(function(){
         }, 500);
       }
     });  
-  }    
+
+  }
 
   function filterPosts(query, callback){
+    // filter according to query, for now just fixed criteria: movie.rating > 2
     var filtered = [];
     filtered.data = myObj.data.filter(function(movie){
       return movie.rating > 2;
     });
-    return callback(myObj);
+    callback(filtered);
   }
-
-
-
-
-
 
 });
 

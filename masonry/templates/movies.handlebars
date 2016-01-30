@@ -1,18 +1,13 @@
-<div id="#moxie-press">
-  <div class="moxie-control"><p><a href="#" id="filter" class="button">filter</a></p></div>
-  <div class="grid" id="moxie-grid">
-    {{#each data}}
-      <div class="movie-item grid-item grid-item--width" data-img="{{poster_url}}">
-        <div class="overlay"></div>
-        <div class="card-content">
-          <h3>{{title}}</h3>
-          <div class="meta">
-            <div class="info">description: {{short_description}}</div>
-            <div class="rating">rating: {{rating}}</div>
-            <div class="year">year: {{year}}</div>
-          </div>
-        </div>
+{{#each data}}
+  <div class="movie-item grid-item grid-item--width" style="background-image: url({{poster_url}})">
+    <div class="overlay"></div>
+    <div class="card-content">
+      <h3>{{title}}</h3>
+      <div class="meta">
+        <div class="info">{{short_description}}</div>
+        <div class="rating">rating: {{rating}}</div>
+        <div class="year">year: {{year}}</div>
       </div>
-    {{/each}}
+    </div>
   </div>
-</div>
+{{/each}}

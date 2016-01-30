@@ -38,8 +38,12 @@ What it does: creates a masonry layout for movies created by moxie-press
   // render the handlebars precompiled template
   function moxie_press_masonry_render_template(){
     $dir = dirname(__FILE__);
-    echo '<div class="moxie_press_container hide">'; 
-    echo '<script id="moxie-press" type="text/x-handlebars-template">';
+    echo '<div class="moxie_press_container">'; 
+    echo '<script id="moxie-template-movie" type="text/x-handlebars-template">';
       @include_once "$dir/templates/movies.handlebars";
     echo '</script>'; 
+    echo '<script id="moxie-template-container" type="text/x-handlebars-template">';
+      @include_once "$dir/templates/container.handlebars";
+    echo '</script>'; 
+    echo '</div>';
   }
