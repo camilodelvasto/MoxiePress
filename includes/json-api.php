@@ -58,6 +58,7 @@ function moxie_press_endpoint_data() {
           'rating'  => get_post_meta($id, 'moxie_press_rating',true),
           'year'  => get_post_meta($id, 'moxie_press_year',true),
           'short_description'  => get_post_meta($id, 'moxie_press_description',true),
+          'mdbid'  => get_post_meta($id, 'moxie_press_mdbid',true),
       );
     endwhile; wp_reset_postdata(); endif;
  

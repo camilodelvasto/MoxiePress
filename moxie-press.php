@@ -128,8 +128,14 @@ Text Domain:  moxie-press
 
       <p>
         <label for="moxie_press_description"><b><?php _e( 'Description', 'moxie-press' ); ?></b><br>
-        <i>Short description. Accepts HTML tags.</i></label><br>
-        <textarea name="moxie_press_description" id="moxie_press_description" cols="50"><?php echo moxie_press_get_meta( 'moxie_press_description' ); ?></textarea>
+        <i>Short description, please no more than 200 chars</i></label><br>
+        <textarea name="moxie_press_description" id="moxie_press_description" cols="50" rows="10"><?php echo moxie_press_get_meta( 'moxie_press_description' ); ?></textarea>
+      </p>
+
+      <p>
+        <label for="moxie_press_mdbid"><b><?php _e( 'Movie Database ID', 'moxie-press' ); ?></b><br>
+        <i>Paste here the ID of this movie on <a href="https://www.themoviedb.org" target="_blank" >www.themoviedb.org</a></i></label><br>
+        <input type="text" name="moxie_press_mdbid" id="moxie_press_mdbid" value="<?php echo moxie_press_get_meta( 'moxie_press_mdbid' ); ?>">
       </p><?php
     }
 
@@ -147,6 +153,8 @@ Text Domain:  moxie-press
         update_post_meta( $post_id, 'moxie_press_year', esc_attr( $_POST['moxie_press_year'] ) );
       if ( isset( $_POST['moxie_press_description'] ) )
         update_post_meta( $post_id, 'moxie_press_description', esc_attr( $_POST['moxie_press_description'] ) );
+      if ( isset( $_POST['moxie_press_mdbid'] ) )
+        update_post_meta( $post_id, 'moxie_press_mdbid', esc_attr( $_POST['moxie_press_mdbid'] ) );
     }
     add_action( 'save_post', 'moxie_press_save' );
 

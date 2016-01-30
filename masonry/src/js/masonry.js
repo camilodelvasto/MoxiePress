@@ -68,19 +68,59 @@ $(document).ready(function(){
 
     // click handler
     grid.on( 'click', '.grid-item', function() {
-      $('.grid').children('.grid-item').not(this).removeClass('grid-item--gigante');
-      $( this ).toggleClass('grid-item--gigante');
-      grid.masonry('layout');
+      if(!$(this).hasClass('grid-item--gigante')){
+        $('.grid-item').removeClass('grid-item--gigante');
+        $( this ).addClass('grid-item--gigante');
+        $(this).find('.card-info').addClass('active');
+        grid.masonry('layout');
 
-      if($(this).hasClass('grid-item--gigante')){
-        $this = $(this);
-        $('html, body').animate({
-            scrollTop: $this.offset().top
-        }, 500);
+        // scroll to position todo: fix!!!!
+        if($(this).hasClass('grid-item--gigante')){
+          $this = $(this);
+          $('html, body').animate({
+              scrollTop: $this.offset().top - 50
+          }, 500);          
+        }
+      } else {
+        // card is already active
+        if($(this).find('.card-info').hasClass('active')){
+          $(this).find('.card-info').removeClass('active').fadeOut(50);
+          $(this).find('.card-embed').fadeIn();
+          insertVideo($(this).find('.card-embed'),$(this).data('mdbid'));
+        } else {
+          $(this).find('.card-info').addClass('active').fadeIn();
+          $(this).find('.card-embed').fadeOut(50);
+        }
       }
     });  
 
   }
+
+  function insertVideo(target,mdbid){
+    var mdb_api = '4b94e36814dcea14914304d5f814330c';
+    var url = 'https://api.themoviedb.org/3/movie/' + mdbid + '/videos?api_key=' + mdb_api;
+
+    // notify user and then perform ajax call
+    if ( mdbid == undefined || mdbid.length == 0 ) {
+      target.html('<p>Sorry, there are no related videos</p>');
+      return
+    }
+    target.html('<p>Searching related videos or trailers in themoviedb.org</p>');
+    $.ajax({
+      url: url,
+      cache: true,
+      dataType: 'json',
+      success: function(videos){
+        var embed = "<style>.embed-container { position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden; max-width: 100%; } .embed-container iframe, .embed-container object, .embed-container embed { position: absolute; top: 0; left: 0; width: 100%; height: 100%; }</style><div class='embed-container'><iframe src='http://www.youtube.com/embed/" + videos.results[0].key + "' frameborder='0' allowfullscreen></iframe></div>";
+        if(videos.results !== undefined && videos.results.length > 0) target.animate().html(embed);
+        else target.html('<p>Sorry, we found no videos for this movie</p>');
+      },
+      error: function(err){
+        console.log(err);
+      }
+    });
+  }
+
 
   function filterPosts(query, callback){
     // filter according to query, for now just fixed criteria: movie.rating > 2
