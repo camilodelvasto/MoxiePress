@@ -47,11 +47,16 @@ $(document).ready(function(){
 
   // display movie collection using provided (filtered) data and movie template
   function displayMovieCollection(data){
-    //render template using movie collection from data
-    var template = Handlebars.compile($("#moxie-template-movie").html());
-    $('#moxie-grid').fadeOut(0).html(template(data)).fadeIn();
+    if(data.data != undefined && data.data.length > 0){
+      //render template using movie collection from data
+      var template = Handlebars.compile($("#moxie-template-movie").html());
+      $('#moxie-control').fadeIn();
+      $('#moxie-grid').fadeOut(0).html(template(data)).fadeIn();
 
-    updateGrid(); // activate masonry when finished
+      updateGrid(); // activate masonry when finished
+    } else {
+      $('#moxie-grid').fadeOut(0).html('<p>Sorry, no movies found in the collection</p>').fadeIn();      
+    }
 
   }
 
@@ -69,31 +74,59 @@ $(document).ready(function(){
     // click handler
     grid.on( 'click', '.grid-item', function() {
       if(!$(this).hasClass('grid-item--gigante')){
+
+        pauseAllVideos();
+        playThisVideo($(this));
+
         $('.grid-item').removeClass('grid-item--gigante');
         $( this ).addClass('grid-item--gigante');
         $(this).find('.card-info').addClass('active');
         grid.masonry('layout');
 
-        // scroll to position todo: fix!!!!
-        if($(this).hasClass('grid-item--gigante')){
-          $this = $(this);
-          $('html, body').animate({
-              scrollTop: $this.offset().top - 50
-          }, 500);          
-        }
+        // scroll to position, delay to allow grid to finish
+        setTimeout(scrollToTarget.bind(null, $(this)), 250);
       } else {
         // card is already active
         if($(this).find('.card-info').hasClass('active')){
           $(this).find('.card-info').removeClass('active').fadeOut(50);
           $(this).find('.card-embed').fadeIn();
-          insertVideo($(this).find('.card-embed'),$(this).data('mdbid'));
+
+          // insert video from youtube
+          insertVideo($(this).find('.card-embed'),$(this).data('mdbid'),true);
         } else {
           $(this).find('.card-info').addClass('active').fadeIn();
           $(this).find('.card-embed').fadeOut(50);
         }
       }
-    });  
+    }); 
+    
+  }
 
+  // scroll to target if grid has changed
+  function scrollToTarget(target){
+    if(target.hasClass('grid-item--gigante')){
+      $('html, body').animate({
+          scrollTop: target.offset().top - 50
+      }, 500);         
+    }
+  }
+
+  // video functions: play and pause selected videos
+  function playThisVideo(player){
+    var player = $(player).find('.moxie-player');
+    if(player !== undefined && player.length > 0) {
+      player[0].contentWindow.postMessage('{"event":"command","func":"' + 'playVideo' + '","args":""}', '*');   
+    }
+
+  }
+  function pauseAllVideos(){
+    // pause all youtube videos
+    var players = $('.moxie-player');
+    if(players !== undefined && players.length > 0) {
+      players.each(function(index,player){
+        player.contentWindow.postMessage('{"event":"command","func":"' + 'pauseVideo' + '","args":""}', '*');   
+      });
+    }
   }
 
   function insertVideo(target,mdbid){
@@ -111,7 +144,8 @@ $(document).ready(function(){
       cache: true,
       dataType: 'json',
       success: function(videos){
-        var embed = "<style>.embed-container { position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden; max-width: 100%; } .embed-container iframe, .embed-container object, .embed-container embed { position: absolute; top: 0; left: 0; width: 100%; height: 100%; }</style><div class='embed-container'><iframe src='http://www.youtube.com/embed/" + videos.results[0].key + "' frameborder='0' allowfullscreen></iframe></div>";
+        var embed = "<style>.embed-container { position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden; max-width: 100%; } .embed-container iframe, .embed-container object, .embed-container embed { position: absolute; top: 0; left: 0; width: 100%; height: 100%; }</style><div class='moxie-embed-container' id='player-" + mdbid + "'><iframe class='moxie-player' id='moxie-player-"+mdbid+"' src='http://www.youtube.com/embed/" + videos.results[0].key + "?enablejsapi=1&version=3&playerapiid=ytplayer&rel=0&amp;autoplay=1' frameborder='0' allowfullscreen='true' allowscriptaccess='always'></iframe></div>";
+        //var embed = '<iframe class="moxie-player" id="moxie-player-'+mdbid+'" width="320" height="230" src="http://www.youtube.com/embed/'+videos.results[0].key+'?enablejsapi=1&version=3&playerapiid=ytplayer" frameborder="0" allowfullscreen="true" allowscriptaccess="always"></iframe>';
         if(videos.results !== undefined && videos.results.length > 0) target.animate().html(embed);
         else target.html('<p>Sorry, we found no videos for this movie</p>');
       },
@@ -122,6 +156,9 @@ $(document).ready(function(){
   }
 
 
+
+
+  // filter functions
   function filterPosts(query, callback){
     // filter according to query, for now just fixed criteria: movie.rating > 2
     var filtered = [];
@@ -132,4 +169,3 @@ $(document).ready(function(){
   }
 
 });
-

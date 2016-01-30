@@ -1,8 +1,8 @@
 {{#each data}}
-  <div class="movie-item grid-item grid-item--width" style="background-image: url({{poster_url}})" data-mdbid="{{mdbid}}">
+  <div class="movie-item grid-item grid-item--width" style="background-image: url({{poster_url}})" data-mdbid="{{mdbid}}" title="{{{short_description}}}">
     <div class="overlay"></div>
     <div class="card-content">
-      <div class="card-info">
+      <div class="card-info" title="Click here for related videos">
         <h3>{{title}}</h3>
         <div class="meta">
           <div class="info">{{{short_description}}}</div>
