@@ -1,0 +1,1 @@
+$(document).ready(function(){console.log(moxie_press_vars.endpoint)});

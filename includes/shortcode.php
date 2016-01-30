@@ -5,7 +5,6 @@ File:         includes/shortcode.php
 What it does: creates a shortcode that will read from the api endpoint and will display the movies whenever is called
 **************************************************************************/
 
-
   add_shortcode('moxie-press', 'moxie_press_shortcode');
 
   function moxie_press_shortcode(){
@@ -21,6 +20,9 @@ What it does: creates a shortcode that will read from the api endpoint and will 
 
       // render movies with given endpoint
       moxie_press_masonry_display_movies($endpoint);
+
+      // render the container div for this instance
+      moxie_press_masonry_render_template();
     }
   }
 

@@ -1,0 +1,11 @@
+<div id="#moxie-press" class="grid">
+  {{#each data}}
+    <div class="movie-item grid-item grid-item--width">
+      <h3>{{title}}</h3>
+      <img src="{{poster_url}}" width="100">
+      <div class="info">description: {{short_description}}</div>
+      <div class="rating">rating: {{rating}}</div>
+      <div class="year">year: {{year}}</div>
+    </div>
+  {{/each}}
+</div>

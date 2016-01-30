@@ -23,33 +23,30 @@ Text Domain:  moxie-press
   add_action( 'init', 'moxie_press_register_cpt_movie_collection' );
   add_action( 'init', 'moxie_press_register_movie_custom_fields' );
 
-  // set text-domain var
-  define('TEXT_DOMAIN', 'moxie-press');
-
   // register cpt with mostly default labels and args
   function moxie_press_register_cpt_movie_collection() {
 
     // set default labels and args for this cpt
     $labels = array(
-      'name'               => _x( 'Movies', 'movie', TEXT_DOMAIN ),
-      'singular_name'      => _x( 'Movie', 'movie', TEXT_DOMAIN ),
-      'menu_name'          => _x( 'MoxieMovies', 'movie', TEXT_DOMAIN ),
-      'name_admin_bar'     => _x( 'Movie', 'movie', TEXT_DOMAIN ),
-      'add_new'            => _x( 'Add New', 'movie', TEXT_DOMAIN ),
-      'add_new_item'       => __( 'Add New Movie', TEXT_DOMAIN ),
-      'new_item'           => __( 'New Movie', TEXT_DOMAIN ),
-      'edit_item'          => __( 'Edit Movie', TEXT_DOMAIN ),
-      'view_item'          => __( 'View Movie', TEXT_DOMAIN ),
-      'all_items'          => __( 'All Movies', TEXT_DOMAIN ),
-      'search_items'       => __( 'Search Movies', TEXT_DOMAIN ),
-      'parent_item_colon'  => __( 'Parent Movies:', TEXT_DOMAIN ),
-      'not_found'          => __( 'No Movies found.', TEXT_DOMAIN ),
-      'not_found_in_trash' => __( 'No Movies found in Trash.', TEXT_DOMAIN )
+      'name'               => _x( 'Movies', 'movie', 'moxie-press' ),
+      'singular_name'      => _x( 'Movie', 'movie', 'moxie-press' ),
+      'menu_name'          => _x( 'MoxieMovies', 'movie', 'moxie-press' ),
+      'name_admin_bar'     => _x( 'Movie', 'movie', 'moxie-press' ),
+      'add_new'            => _x( 'Add New', 'movie', 'moxie-press' ),
+      'add_new_item'       => __( 'Add New Movie', 'moxie-press' ),
+      'new_item'           => __( 'New Movie', 'moxie-press' ),
+      'edit_item'          => __( 'Edit Movie', 'moxie-press' ),
+      'view_item'          => __( 'View Movie', 'moxie-press' ),
+      'all_items'          => __( 'All Movies', 'moxie-press' ),
+      'search_items'       => __( 'Search Movies', 'moxie-press' ),
+      'parent_item_colon'  => __( 'Parent Movies:', 'moxie-press' ),
+      'not_found'          => __( 'No Movies found.', 'moxie-press' ),
+      'not_found_in_trash' => __( 'No Movies found in Trash.', 'moxie-press' )
     );
 
     $args = array(
       'labels'             => $labels,
-      'description'        => __( 'Description.', TEXT_DOMAIN ),
+      'description'        => __( 'Description.', 'moxie-press' ),
       'public'             => true,
       'publicly_queryable' => true,
       'show_ui'            => true,
@@ -102,13 +99,13 @@ Text Domain:  moxie-press
       wp_nonce_field( '_moxie_press_nonce', 'moxie_press_nonce' ); ?>
 
       <p>
-        <label for="moxie_press_poster_url"><b><?php _e( 'Poster URL', TEXT_DOMAIN ); ?></b><br>
+        <label for="moxie_press_poster_url"><b><?php _e( 'Poster URL', 'moxie-press' ); ?></b><br>
         <i>Paste here the URL of the poster image for this movie</i></label><br>
         <input type="text" name="moxie_press_poster_url" id="moxie_press_poster_url" value="<?php echo moxie_press_get_meta( 'moxie_press_poster_url' ); ?>">
       </p>
 
       <p>
-        <label for="moxie_press_rating"><b><?php _e( 'Rating', TEXT_DOMAIN ); ?></b><br>
+        <label for="moxie_press_rating"><b><?php _e( 'Rating', 'moxie-press' ); ?></b><br>
         <i>Movie rating, from 1 to 5</i></label><br>
         <select name="moxie_press_rating" id="moxie_press_rating">
           <option <?php echo (moxie_press_get_meta( 'moxie_press_rating' ) === '1' ) ? 'selected' : '' ?>>1</option>
@@ -120,7 +117,7 @@ Text Domain:  moxie-press
       </p>
 
       <p>
-        <label for="moxie_press_year"><b><?php _e( 'Year', TEXT_DOMAIN ); ?></b></label><br>
+        <label for="moxie_press_year"><b><?php _e( 'Year', 'moxie-press' ); ?></b></label><br>
         <i>The year the movie was published</i></label><br>
         <select name="moxie_press_year" id="moxie_press_year"> <?php
           for($year = 2016; $year > 1900; $year--){ ?>
@@ -130,7 +127,7 @@ Text Domain:  moxie-press
       </p>
 
       <p>
-        <label for="moxie_press_description"><b><?php _e( 'Description', TEXT_DOMAIN ); ?></b><br>
+        <label for="moxie_press_description"><b><?php _e( 'Description', 'moxie-press' ); ?></b><br>
         <i>Short description. Accepts HTML tags.</i></label><br>
         <textarea name="moxie_press_description" id="moxie_press_description" cols="50"><?php echo moxie_press_get_meta( 'moxie_press_description' ); ?></textarea>
       </p><?php

@@ -16,8 +16,8 @@ What it does: creates a masonry layout for movies created by moxie-press
     wp_register_script('jquery', "//ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js", '',false, null);
     wp_register_script( 'masonry-vendor', $dir . 'build/vendor/js/masonry.pkgd.min.js', 'jquery'  );
     wp_register_script( 'masonry-theme', $dir . 'src/js/masonry.js', array('jquery', 'masonry-vendor'), '', false  );
+    wp_register_script('handlebars', "//cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.0.5/handlebars.min.js", '',false, null);
     wp_register_style( 'masonry-style', $dir . 'build/css/style.css','','', 'screen' );
- 
      //to do: include minized js files
   }
 
@@ -26,10 +26,20 @@ What it does: creates a masonry layout for movies created by moxie-press
     wp_enqueue_script('jquery');
     wp_enqueue_script( 'masonry-vendor' );
     wp_enqueue_script( 'masonry-theme' );
+    wp_enqueue_script( 'handlebars' );
     wp_enqueue_style( 'masonry-style' );
   }
 
   // receive the endpoint and enqueue scripts
   function moxie_press_masonry_display_movies($endpoint){
     wp_localize_script( 'masonry-theme', 'moxie_press_vars', array('endpoint' => $endpoint)) ;
+  }
+
+  // render the handlebars precompiled template
+  function moxie_press_masonry_render_template(){
+    $dir = dirname(__FILE__);
+    echo '<div class="moxie_press_container hide"></div>';
+    echo '<script id="moxie-press" type="text/x-handlebars-template">';
+      @include_once "$dir/templates/movies.handlebars";
+    echo '</script>';
   }
