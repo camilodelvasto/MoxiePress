@@ -11,6 +11,8 @@ $cardh1: 230px;
 $cardw2: 480px;
 $cardh2: 230px;
 
+
+
 .moxie_press_container,.overlay{
   -webkit-transition: all 0.1s ease;
   -moz-transition: all 0.1s ease;
@@ -124,13 +126,19 @@ $cardh2: 230px;
     }
     .card-info{
       height:$cardh2 - 40px;
+      width:$cardw2 - $cardw1 - 40px;
     }
     .card-embed{
       display:none;
       width:$cardw2 - $cardw1;
-      height:$cardh2;
+      position:absolute;
+      top:0;
+      right:0;
+      height:$cardh2 - 20px;
+
       p{
         font-size:13px;
+        padding:0 20px;
       }
     }
   }
