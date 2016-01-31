@@ -50,7 +50,7 @@ $(document).ready(function(){
     if(data.data != undefined && data.data.length > 0){
       //render template using movie collection from data
       var template = Handlebars.compile($("#moxie-template-movie").html());
-      $('#moxie-control').fadeIn();
+      $('.moxie-control').fadeIn(10);
       $('#moxie-grid').fadeOut(0).html(template(data)).fadeIn();
 
       updateGrid(); // activate masonry when finished
