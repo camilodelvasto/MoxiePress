@@ -71,36 +71,34 @@ $(document).ready(function(){
       columnWidth: 160
     });
 
+    // if trailer button is clicked
+    $('.card-trigger-trailer').click(function(e){
+      e.preventDefault();
+      var item = $(this).parents('.grid-item');
+      item.animate().toggleClass('card-active');
+      if(item.hasClass('card-active')) {
+        insertVideo(item.find('.card-embed'),item.data('mdbid'));
+        playThisVideo(item);
+      } else {
+        pauseAllVideos();
+      }
+      grid.masonry('layout');
+    })
+
     // click handler
     grid.on( 'click', '.grid-item', function() {
       var item = $(this);
-      if(!item.hasClass('grid-item--gigante')){
+      if(!item.hasClass('grid-item--gigante')){ // if clicked card is already active
 
         pauseAllVideos();
-        playThisVideo(item);
+        if (item.hasClass('.card-active')) playThisVideo(item);
 
-        $('.grid-item').removeClass('grid-item--gigante');
+        $('.grid-item').removeClass('grid-item--gigante').removeClass('card-active');
         $( this ).addClass('grid-item--gigante');
-//        item.find('.card-info').addClass('active');
         grid.masonry('layout');
 
         // scroll to position, delay to allow grid to finish
         setTimeout(scrollToTarget.bind(null, item), 250);
-      } else {
-        item.addClass('card-active');
-        insertVideo(item.find('.card-embed'),item.data('mdbid'),true);
-        grid.masonry('layout');
-        // card is already active
-/*        if(!item.hasClass('card-active')){
-//          item.find('.card-embed').fadeIn();
-          item.addClass('card-active');
-
-          // insert video from youtube
-          insertVideo(item.find('.card-embed'),item.data('mdbid'),true);
-        grid.masonry('layout');
-
-        } else {
-        } */
       }
     }); 
     

@@ -15,7 +15,7 @@ $gutter : 6px;
 
 
 
-.moxie_press_container, .moxie_press_container .overlay{
+.moxie_press_container, .moxie_press_container .overlay, .card-info,.card-embed{
   -webkit-transition: all 0.1s ease;
   -moz-transition: all 0.1s ease;
   -o-transition: all 0.1s ease;
@@ -122,6 +122,9 @@ $gutter : 6px;
       }
       .card-info{
         display:block !important;
+        &:hover{
+          cursor: initial;
+        }
       }
       &.card-active{
         height:$video_h + $poster_h - $gutter;
