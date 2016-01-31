@@ -95,10 +95,23 @@ $gutter : 6px;
       padding:20px;
       color:#ccc;
       font-size:0.9em;
+      p{
+        font-size:0.9em;
+        line-height:1.2em;
+      }
       h3{
         font-size:1.1em;
         margin-top:0;
         color:#fff;
+        padding-right:33px;
+        position:relative;
+      }
+      .rating{
+        position:absolute;
+        right:0;
+        top:0;
+        font-size:0.6em;
+        text-align:right;
       }
     }
     .card-embed{
@@ -117,6 +130,12 @@ $gutter : 6px;
     &.grid-item--gigante{
       height:$poster_h;
       width: $video_w;
+      .hide-active{
+        display:inline;
+      }
+      .show-active{
+        display:none;
+      }
       .overlay{
         display:none;
       }
@@ -129,6 +148,12 @@ $gutter : 6px;
       &.card-active{
         height:$video_h + $poster_h - $gutter;
         background:#f0f;
+        .hide-active{
+          display:none;
+        }
+        .show-active{
+          display:inline;
+        }
         .card-embed{
           display:block !important;
         }
@@ -140,6 +165,8 @@ $gutter : 6px;
     cursor: pointer;
   }
 
-
+  a.card-trigger-trailer{
+    color:#fff;
+  }
 }
 

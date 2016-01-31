@@ -71,6 +71,18 @@ $(document).ready(function(){
       columnWidth: 160
     });
 
+    transformRating();
+    function transformRating(){
+      $('.rating').each(function(index, item){
+        var rating = $(item).html().substr(1,1);
+        var html = '';
+        for(var i = 1; i <= 5; i++){
+          if (i <= rating) html += '&#9733;';
+        }
+        $(item).html(html);
+      });      
+    }
+
     // if trailer button is clicked
     $('.card-trigger-trailer').click(function(e){
       e.preventDefault();
@@ -101,7 +113,6 @@ $(document).ready(function(){
         setTimeout(scrollToTarget.bind(null, item), 250);
       }
     }); 
-    
   }
 
   // scroll to target if grid has changed

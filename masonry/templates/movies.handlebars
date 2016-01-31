@@ -6,11 +6,10 @@
     </div>
     <div class="card-content">
       <div class="card-info">
-        <h3>{{title}}</h3>
-        <div class="info">{{{short_description}}}</div>
-        <div class="rating">rating: {{rating}}</div>
+        <h3>{{title}} <span class="rating">({{rating}}/5)</h3></span>
+        <div class="info"><p>{{{short_description}}}</p></div>
         <div class="year">year: {{year}}</div>
-        {{#if mdbid}}<a href="#" class="card-trigger-trailer">trailer</a>{{/if}}
+        {{#if mdbid}}<p><a href="#" class="card-trigger-trailer">Movie trailer</a> <span class="hide-active">(show)</span><span class="show-active">(hide)</span></p>{{/if}}
       </div>
     </div>
     <div class="card-embed"></div>
