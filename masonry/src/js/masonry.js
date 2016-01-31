@@ -73,30 +73,34 @@ $(document).ready(function(){
 
     // click handler
     grid.on( 'click', '.grid-item', function() {
-      if(!$(this).hasClass('grid-item--gigante')){
+      var item = $(this);
+      if(!item.hasClass('grid-item--gigante')){
 
         pauseAllVideos();
-        playThisVideo($(this));
+        playThisVideo(item);
 
         $('.grid-item').removeClass('grid-item--gigante');
         $( this ).addClass('grid-item--gigante');
-        $(this).find('.card-info').addClass('active');
+//        item.find('.card-info').addClass('active');
         grid.masonry('layout');
 
         // scroll to position, delay to allow grid to finish
-        setTimeout(scrollToTarget.bind(null, $(this)), 250);
+        setTimeout(scrollToTarget.bind(null, item), 250);
       } else {
+        item.addClass('card-active');
+        insertVideo(item.find('.card-embed'),item.data('mdbid'),true);
+        grid.masonry('layout');
         // card is already active
-        if($(this).find('.card-info').hasClass('active')){
-          $(this).find('.card-info').removeClass('active').fadeOut(50);
-          $(this).find('.card-embed').fadeIn();
+/*        if(!item.hasClass('card-active')){
+//          item.find('.card-embed').fadeIn();
+          item.addClass('card-active');
 
           // insert video from youtube
-          insertVideo($(this).find('.card-embed'),$(this).data('mdbid'),true);
+          insertVideo(item.find('.card-embed'),item.data('mdbid'),true);
+        grid.masonry('layout');
+
         } else {
-          $(this).find('.card-info').addClass('active').fadeIn();
-          $(this).find('.card-embed').fadeOut(50);
-        }
+        } */
       }
     }); 
     

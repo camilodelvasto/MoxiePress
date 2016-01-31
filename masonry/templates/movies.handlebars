@@ -1,16 +1,18 @@
 {{#each data}}
-  <div class="movie-item grid-item grid-item--width" style="background-image: url({{poster_url}})" data-mdbid="{{mdbid}}" title="{{{short_description}}}">
-    <div class="overlay"></div>
-    <div class="card-content">
-      <div class="card-info" title="Click here for related videos">
-        <h3>{{title}}</h3>
-        <div class="meta">
-          <div class="info">{{{short_description}}}</div>
-          <div class="rating">rating: {{rating}}</div>
-          <div class="year">year: {{year}}</div>
-        </div>
-      </div>
-      <div class="card-embed"></div>
+  <div class="movie-item grid-item grid-item--width" data-mdbid="{{mdbid}}" title="{{{short_description}}}">
+    <div class="poster">
+      <img src="{{poster_url}}" width="160" height="234" alt="">
+      <div class="overlay"></div>
     </div>
+    <div class="card-content">
+      <div class="card-info">
+        <h3>{{title}}</h3>
+        <div class="info">{{{short_description}}}</div>
+        <div class="rating">rating: {{rating}}</div>
+        <div class="year">year: {{year}}</div>
+        {{#if mdbid}}<a href="#">trailer</a>{{/if}}
+      </div>
+    </div>
+    <div class="card-embed"></div>
   </div>
 {{/each}}

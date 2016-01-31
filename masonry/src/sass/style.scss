@@ -6,20 +6,21 @@ $color2: #49a;
 $colorBg1: rgba(240,239,238,0.9);
 
 // define sizes
-$cardw1: 160px;
-$cardh1: 230px;
-$cardw2: 480px;
-$cardh2: 230px;
+$poster_w: 154px;
+$poster_h: 230px;
+$video_w: 474px;
+$video_h: 242px;
+
+$gutter : 6px;
 
 
 
-.moxie_press_container,.overlay{
+.moxie_press_container, .moxie_press_container .overlay{
   -webkit-transition: all 0.1s ease;
   -moz-transition: all 0.1s ease;
   -o-transition: all 0.1s ease;
   transition: all 0.1s ease;
 }
-
 .moxie_press_container{
 
   .hide{
@@ -56,20 +57,24 @@ $cardh2: 230px;
 
   /* ---- grid-item ---- */
   .grid-item {
-    width: $cardw1 - 6px;
-    height: $cardh1;
+    width: $poster_w;
+    height: $poster_h;
     float: left;
     margin: 3px;
-    background-color:rgb(102,102,102);
-    background-color:rgb(0,0,0);
-    background-repeat:no-repeat;
-    background-position: top left;
-    background-size:contain;
-//    background-position: center center;
-//    background-size: cover;
+    background:#f0f0f0;
     position: relative;
+    .poster{
+      position:absolute;
+      left:0;
+      top:0;
+      width:156px;
+      height:230px;
+      overflow:hidden;
+    }
     .overlay{
       position:absolute;
+      top:0;
+      left:0;
       background:rgba(0,0,0,0.2);
       z-index:1000;
       width:100%;
@@ -78,115 +83,60 @@ $cardh2: 230px;
         background:transparent;
       }
     }
-    .video-embed{
+    .card-info{
       display:none;
+      position:absolute;
+      top:0;
+      right:0;
+      width:$video_w - $poster_w - 40px;;
+      height: $poster_h - 40px;;
+      color:#ccc;
+      background:#000;
+      padding:20px;
+      color:#ccc;
+      font-size:0.9em;
+      h3{
+        font-size:1.1em;
+        margin-top:0;
+        color:#fff;
+      }
+    }
+    .card-embed{
+      display:none;
+      background:#000;
+      position:absolute;
+      top:$poster_h - $gutter;
+      height:$video_h;
+      width:$video_w;
+      color:#ccc;
+      p{
+        padding:20px;
+        font-size:0.9em;
+      }
     }
     &.grid-item--gigante{
+      height:$poster_h;
+      width: $video_w;
       .overlay{
         display:none;
       }
-      .card-content{
+      .card-info{
         display:block !important;
       }
-      .video-embed{
-        display:block;
-        margin-top:5px;
+      &.card-active{
+        height:$video_h + $poster_h - $gutter;
+        background:#f0f;
+        .card-embed{
+          display:block !important;
+        }
       }
     }
-  }
-
-  .grid-item--gigante {
-    height: $cardh2;
-    width: $cardw2 - 6px;
-  }
-
-  .grid-item--gigante .card-content .meta, .grid-item--gigante .card-content a.button, .grid-item--gigante .card-content div.rank {
-    display: block;
   }
 
   .grid-item:hover {
     cursor: pointer;
   }
 
-  .card-content {
-    position: absolute;
-    color:#ccc;
-    right: 0;
-    width: $cardw2 - $cardw1 - 40px;
-    padding:20px;
-    height: $cardh2 - 40px;
-    overflow: hidden;
-    display:none;
-    font-size: 13px;
-    line-height: 1.4;
-    h3{
-      margin-top:0;
-      font-size:15px;
-      color:#fff;
-    }
-    .card-info{
-      height:$cardh2 - 40px;
-      width:$cardw2 - $cardw1 - 40px;
-    }
-    .card-embed{
-      display:none;
-      width:$cardw2 - $cardw1;
-      position:absolute;
-      top:0;
-      right:0;
-      height:$cardh2 - 20px;
-
-      p{
-        font-size:13px;
-        padding:0 20px;
-      }
-    }
-  }
-
 
 }
 
-@media screen and (max-width: 490px) {
-  .grid {
-    margin-top: 60px;
-  }
-
-  .grid-item {
-    width: 100%;
-    height: 200px;
-    position: relative;
-    margin: 0;
-    margin-bottom: 3%;
-  }
-  .grid-item .card-content {
-    position: absolute;
-    width: 96%;
-    left: auto;
-    right: 2%;
-    bottom: 4%;
-  }
-  .grid-item .card-content .meta {
-    display: block;
-  }
-
-  .grid-item--gigante {
-    min-width: auto !important;
-    min-height: 250px;
-  }
-  .grid-item--gigante .card-content {
-    min-width: 0;
-    width: 96%;
-  }
-
-  .grid-item--width3 h2, .grid-item--width4 h2, .grid-item--gigante h2 {
-    font-size: 14px;
-  }
-
-  #info{
-    position:absolute;
-    right:5px;
-    top:10px;
-    font-size:0.9em;
-    text-decoration:underline;
-  }
-}
