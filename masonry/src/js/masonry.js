@@ -66,14 +66,14 @@ $(document).ready(function(){
       grid.masonry('destroy');
       grid.unbind('click');
     }
-    grid = $('.grid').masonry({
-      itemSelector: '.grid-item',
-      columnWidth: 160
+    grid = $('.mxp_grid').masonry({
+      itemSelector: '.mxp_grid-item',
+      columnWidth: 150
     });
 
     transformRating();
     function transformRating(){
-      $('.rating').each(function(index, item){
+      $('.mxp_rating-transform').each(function(index, item){
         var rating = $(item).html().substr(1,1);
         var html = '';
         for(var i = 1; i <= 5; i++){
@@ -84,12 +84,12 @@ $(document).ready(function(){
     }
 
     // if trailer button is clicked
-    $('.card-trigger-trailer').click(function(e){
+    $('.mxp_card-trigger-trailer').click(function(e){
       e.preventDefault();
-      var item = $(this).parents('.grid-item');
-      item.animate().toggleClass('card-active');
-      if(item.hasClass('card-active')) {
-        insertVideo(item.find('.card-embed'),item.data('mdbid'));
+      var item = $(this).parents('.mxp_grid-item');
+      item.animate().toggleClass('mxp_card-active');
+      if(item.hasClass('mxp_card-active')) {
+        insertVideo(item.find('.mxp_card-embed'),item.data('mdbid'));
         playThisVideo(item);
       } else {
         pauseAllVideos();
@@ -98,15 +98,15 @@ $(document).ready(function(){
     })
 
     // click handler
-    grid.on( 'click', '.grid-item', function() {
+    grid.on( 'click', '.mxp_grid-item', function() {
       var item = $(this);
-      if(!item.hasClass('grid-item--gigante')){ // if clicked card is already active
+      if(!item.hasClass('mxp_grid-item--gigante')){ // if clicked card is already active
 
         pauseAllVideos();
-        if (item.hasClass('.card-active')) playThisVideo(item);
+        if (item.hasClass('.mxp_card-active')) playThisVideo(item);
 
-        $('.grid-item').removeClass('grid-item--gigante').removeClass('card-active');
-        $( this ).addClass('grid-item--gigante');
+        $('.mxp_grid-item').removeClass('mxp_grid-item--gigante').removeClass('mxp_card-active');
+        $( this ).addClass('mxp_grid-item--gigante');
         grid.masonry('layout');
 
         // scroll to position, delay to allow grid to finish
@@ -117,7 +117,7 @@ $(document).ready(function(){
 
   // scroll to target if grid has changed
   function scrollToTarget(target){
-    if(target.hasClass('grid-item--gigante')){
+    if(target.hasClass('mxp_grid-item--gigante')){
       $('html, body').animate({
           scrollTop: target.offset().top - 50
       }, 500);         
@@ -126,7 +126,7 @@ $(document).ready(function(){
 
   // video functions: play and pause selected videos
   function playThisVideo(player){
-    var player = $(player).find('.moxie-player');
+    var player = $(player).find('.mxp_moxie-player');
     if(player !== undefined && player.length > 0) {
       player[0].contentWindow.postMessage('{"event":"command","func":"' + 'playVideo' + '","args":""}', '*');   
     }
@@ -147,7 +147,7 @@ $(document).ready(function(){
     var url = 'https://api.themoviedb.org/3/movie/' + mdbid + '/videos?api_key=' + mdb_api;
 
     // exit if player already exists on the target
-    var player = target.find('.moxie-player');
+    var player = target.find('.mxp_moxie-player');
     if(player != undefined && player.length > 0 ) {
       playThisVideo(player);
       return

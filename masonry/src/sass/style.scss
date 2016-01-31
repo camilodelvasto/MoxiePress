@@ -6,9 +6,9 @@ $color2: #49a;
 $colorBg1: rgba(240,239,238,0.9);
 
 // define sizes
-$poster_w: 154px;
-$poster_h: 230px;
-$video_w: 474px;
+$poster_w: 144px;
+$poster_h: 215px;
+$video_w: 444px;
 $video_h: 242px;
 
 $gutter : 6px;
@@ -23,11 +23,15 @@ $gutter : 6px;
 }
 .moxie_press_container{
 
-  .hide{
+  .mxp_hide{
     display:none; 
   }
 
-  .small{
+  .mxp_hide-desktop{
+    display:none;
+  }
+
+  .mxp_small{
     font-size:0.8em;
   }
 
@@ -43,35 +47,32 @@ $gutter : 6px;
     background: rgba(40, 50, 80, 0.8);
   }
 
-  .hide-desktop{
-    display:none;
-  }
-
   /* ---- grid ---- */
   /* clearfix */
-  .grid:after {
+  .mxp_grid:after {
     content: '';
     display: block;
     clear: both;
   }
 
   /* ---- grid-item ---- */
-  .grid-item {
+  .mxp_grid-item {
     width: $poster_w;
     height: $poster_h;
+    overflow:hidden;
     float: left;
     margin: 3px;
     background:#f0f0f0;
     position: relative;
-    .poster{
+    .mxp_poster{
       position:absolute;
       left:0;
       top:0;
-      width:156px;
-      height:230px;
+      width:$poster_w + 2;
+      height:$poster_h;
       overflow:hidden;
     }
-    .overlay{
+    .mxp_overlay{
       position:absolute;
       top:0;
       left:0;
@@ -83,7 +84,7 @@ $gutter : 6px;
         background:transparent;
       }
     }
-    .card-info{
+    .mxp_card-info{
       display:none;
       position:absolute;
       top:0;
@@ -105,8 +106,11 @@ $gutter : 6px;
         color:#fff;
         padding-right:33px;
         position:relative;
+        .mxp_year{
+          color:#ccc;
+        }
       }
-      .rating{
+      .mxp_rating-transform{
         position:absolute;
         right:0;
         top:0;
@@ -114,7 +118,7 @@ $gutter : 6px;
         text-align:right;
       }
     }
-    .card-embed{
+    .mxp_card-embed{
       display:none;
       background:#000;
       position:absolute;
@@ -127,46 +131,57 @@ $gutter : 6px;
         font-size:0.9em;
       }
     }
-    &.grid-item--gigante{
+    &.mxp_grid-item--gigante{
       height:$poster_h;
       width: $video_w;
-      .hide-active{
+      .mxp_hide-active{
         display:inline;
       }
-      .show-active{
+      .mxp_show-active{
         display:none;
       }
-      .overlay{
+      .mxp_overlay{
         display:none;
       }
-      .card-info{
+      .mxp_card-info{
         display:block !important;
         &:hover{
           cursor: initial;
         }
       }
-      &.card-active{
+      &.mxp_card-active{
         height:$video_h + $poster_h - $gutter;
-        background:#f0f;
-        .hide-active{
+        .mxp_hide-active{
           display:none;
         }
-        .show-active{
+        .mxp_show-active{
           display:inline;
         }
-        .card-embed{
+        .mxp_card-embed{
           display:block !important;
         }
       }
     }
   }
 
-  .grid-item:hover {
+  .mxp_grid-item:hover {
     cursor: pointer;
   }
 
-  a.card-trigger-trailer{
+  a.mxp_card-trigger-trailer{
     color:#fff;
+  }
+}
+
+@media screen and (max-width:480px){
+  .moxie_press_container{
+    .mxp_hide-desktop{
+      display:block;
+    }
+    .mxp_hide-mobile{
+      display:none;
+    }
+
   }
 }
 
