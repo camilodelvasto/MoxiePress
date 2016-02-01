@@ -21,9 +21,10 @@ $(document).ready(function(){
     getPosts('',displayMovieCollection);
 
     // listen to controls
-    $('#filter').click(function(e){
+    $('#mxp_filter').click(function(e){
       e.preventDefault();
       filterPosts('',displayMovieCollection);
+      return false;
     })
 
   })();
@@ -47,29 +48,27 @@ $(document).ready(function(){
 
   // display movie collection using provided (filtered) data and movie template
   function displayMovieCollection(data){
-    if(data.data != undefined && data.data.length > 0){
-      //render template using movie collection from data
-      var template = Handlebars.compile($("#moxie-template-movie").html());
-      $('.moxie-control').fadeIn(10);
-      $('#moxie-grid').fadeOut(0).html(template(data)).fadeIn();
+    //render template using movie collection from data
+    var template = Handlebars.compile($("#moxie-template-movie").html());
+    var newHtml = template(data);
 
-      updateGrid(); // activate masonry when finished
-    } else {
-      $('#moxie-grid').fadeOut(0).html('<p>Sorry, no movies found in the collection</p>').fadeIn();      
-    }
+    $('.moxie-control').fadeIn(50);
+    $('#moxie-grid').css('min-height',$('#moxie-grid').height());
+    $('.mxp_grid-overlay').show().fadeOut();
+    $('#moxie-grid').html(template(data));
+    updateGrid(); // activate masonry when finished
 
   }
 
+  // set global grid width based on screen size
   (function getScreenSize(){
-      myScreen.height = $(window).height();
-      myScreen.width = $(window).width();
-      if(myScreen.width > 475) {
-        myScreen.gridItem = 150;
-      }
-      else { 
-        myScreen.gridItem = myScreen.width*45/100;
-      }
+    // call on init and whenever the screen is resized
+    setGridItemSize();
     $(window).resize(function(){
+      setGridItemSize();
+    });
+
+    function setGridItemSize(){
       myScreen.height = $(window).height();
       myScreen.width = $(window).width();
       if(myScreen.width > 475) {
@@ -78,7 +77,7 @@ $(document).ready(function(){
         myScreen.gridItem = (myScreen.width > 320? myScreen.width*45/100 : 160);
       }
       updateGrid();
-    });
+    }
   })();
 
   // update width attr for all poster images depending on the screen size
@@ -91,33 +90,24 @@ $(document).ready(function(){
     });      
   }
 
+  // 
   function updateGrid(){
     // layout items again and define click handler
     if (grid !== undefined) {
       grid.masonry('destroy');
-      grid.unbind('click');
     }
 
     updateImageSize();
 
+    // create masonry object
     grid = $('.mxp_grid').masonry({
       itemSelector: '.mxp_grid-item',
       columnWidth: myScreen.gridItem
     });
 
-    transformRating(); // transform rating number into stars
-    function transformRating(){
-      $('.mxp_rating-transform').each(function(index, item){
-        var rating = $(item).html().substr(1,1);
-        var html = '';
-        for(var i = 1; i <= 5; i++){
-          if (i <= rating) html += '&#9733;';
-        }
-        $(item).html(html);
-      });      
-    }
+    transformRating();
 
-    // if trailer button is clicked
+    // if trailer button is clicked then display and call youtube api
     $('.mxp_card-trigger-trailer').click(function(e){
       e.preventDefault();
       var item = $(this).parents('.mxp_grid-item');
@@ -128,10 +118,10 @@ $(document).ready(function(){
       } else {
         pauseAllVideos();
       }
-      grid.masonry('layout');
+      grid.masonry('layout'); // lay out items again
     })
 
-    // click handler
+    // click handler for each card
     grid.on( 'click', '.mxp_grid-item', function() {
       var item = $(this);
       if(!item.hasClass('mxp_grid-item--gigante')){ // if clicked card is already active
@@ -147,6 +137,18 @@ $(document).ready(function(){
         setTimeout(scrollToTarget.bind(null, item), 250);
       }
     }); 
+  }
+
+  // transform rating number into stars
+  function transformRating(){
+    $('.mxp_rating-transform').each(function(index, item){
+      var rating = $(item).html().substr(1,1);
+      var html = '';
+      for(var i = 1; i <= 5; i++){
+        if (i <= rating) html += '&#9733;';
+      }
+      $(item).html(html);
+    });      
   }
 
   // scroll to target if grid has changed
@@ -176,6 +178,7 @@ $(document).ready(function(){
     }
   }
 
+  // call mdb api to get related videos, then call youtube to get the player
   function insertVideo(target,mdbid){
     var mdb_api = '4b94e36814dcea14914304d5f814330c';
     var url = 'https://api.themoviedb.org/3/movie/' + mdbid + '/videos?api_key=' + mdb_api;
@@ -193,6 +196,8 @@ $(document).ready(function(){
       return
     }
     target.html('<p>Searching related videos or trailers in themoviedb.org</p>');
+
+    // perform ajax call using mdb id
     $.ajax({
       url: url,
       cache: true,
@@ -208,9 +213,6 @@ $(document).ready(function(){
     });
   }
 
-
-
-
   // filter functions
   function filterPosts(query, callback){
     // filter according to query, for now just fixed criteria: movie.rating > 2
@@ -220,5 +222,7 @@ $(document).ready(function(){
     });
     callback(filtered);
   }
+
+
 
 });

@@ -1,16 +1,22 @@
-{{#each data}}
-  <div class="mxp_movie-item mxp_grid-item mxp_grid-item--width" data-mdbid="{{mdbid}}" title="{{{short_description}}}">
-    <div class="mxp_poster">
-      <img src="{{poster_url}}" width="150" height="220" alt="">
-      <div class="mxp_overlay"></div>
-    </div>
-    <div class="mxp_card-content">
-      <div class="mxp_card-info">
-        <h3>{{title}} <span class="year">({{year}})</span><span class="mxp_rating-transform">({{rating}}/5)</h3></span>
-        <div class="mxp_info "><p>{{{short_description}}}</p></div>
-        {{#if mdbid}}<p><a href="#" class="mxp_card-trigger-trailer">Movie trailer</a> <span class="mxp_hide-active">(show)</span><span class="mxp_show-active">(hide)</span></p>{{/if}}
+{{#if data}}
+  {{#each data}}
+    <div class="mxp_movie-item mxp_grid-item mxp_grid-item--width" data-mdbid="{{mdbid}}" title="{{{short_description}}}">
+      <div class="mxp_poster">
+        <img src="{{poster_url}}" width="150" height="220" alt="">
+        <div class="mxp_overlay"></div>
       </div>
+      <div class="mxp_card-content">
+        <div class="mxp_card-info">
+          <h3>{{title}} <span class="year">({{year}})</span><span class="mxp_rating-transform">({{rating}}/5)</h3></span>
+          <div class="mxp_info "><p>{{{short_description}}}</p></div>
+          {{#if mdbid}}<p>
+            <a href="#" class="mxp_card-trigger-trailer mxp_button"><span class="mxp_hide-active">Show </span><span class="mxp_show-active">Hide </span>movie trailer</a></p>
+          {{/if}}
+        </div>
+      </div>
+      <div class="mxp_card-embed"></div>
     </div>
-    <div class="mxp_card-embed"></div>
-  </div>
-{{/each}}
+  {{/each}}
+{{else}}
+  <p class="mxp_message">No movies found</p>
+{{/if}}

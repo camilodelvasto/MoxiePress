@@ -14,18 +14,28 @@ $video_h: 242px;
 $gutter : 6px;
 
 
-
-.moxie_press_container, .moxie_press_container .overlay, .card-info,.card-embed{
+/* set transitions */
+.moxie_press_container, .mxp_overlay, .mxp_card-info,.mxp_card-embed,#moxie-grid{
   -webkit-transition: all 0.1s ease;
   -moz-transition: all 0.1s ease;
   -o-transition: all 0.1s ease;
   transition: all 0.1s ease;
 }
-.moxie_press_container{
+.mxp_hide{
+  display:none;
+}
 
-  .mxp_hide{
-    display:none; 
-  }
+.mxp_grid-overlay{
+  background:#fff;
+  width:100%;
+  display:none;
+  position:absolute;
+  height:100%;
+  width:100%;
+  z-index:2000;
+}
+/* standard styles for the plugin on desktop or bigger screens */
+.moxie_press_container{
 
   .mxp_hide-desktop{
     display:none;
@@ -35,7 +45,7 @@ $gutter : 6px;
     font-size:0.8em;
   }
 
-  a.button {
+  .mxp_button {
     background: #202E39;
     color: #fff;
     border-radius: 5px;
@@ -43,10 +53,23 @@ $gutter : 6px;
     margin: 10px 0;
     text-decoration: none;
   }
-  a.button:hover {
+  .mxp_button:hover {
     background: rgba(40, 50, 80, 0.8);
   }
 
+  #moxie-press{
+    position:relative;
+  }
+
+  #moxie-control{
+    display:none;
+  }
+
+  #moxie-grid{
+   transition: opacity .25s ease-in-out;
+   -moz-transition: opacity .25s ease-in-out;
+   -webkit-transition: opacity .25s ease-in-out;
+  }
   /* ---- grid ---- */
   /* clearfix */
   .mxp_grid:after {
@@ -194,9 +217,7 @@ $gutter : 6px;
       width:45%;
       margin:1%;
       min-width:145px;
-
       overflow:hidden;
-      background:#f00;
       .mxp_poster{
         width:100%;
         max-width:204px;
