@@ -6,6 +6,8 @@ What it does: consumes the service and renders movies on the page
 
 var myObj,initialized = false;
 var grid, myScreen = [];
+var filterContext = {};
+
 
 $(document).ready(function(){
   var endpoint = moxie_press_vars.endpoint;
@@ -13,20 +15,48 @@ $(document).ready(function(){
   // initialize: get posts and displays them
   (function initialize(){
 
+    // initialize container object
+    filterContext = {
+      sort_rating_order:  'desc',
+      sort_year_order:    'desc',
+      title:              'Moxie Press Movie Collection',
+      sort_year_text:     'year: ',
+      sort_rating_text:   'rating: '
+    };
     // render container template
-    var template = Handlebars.compile($("#moxie-template-container").html());
-    $('.moxie_press_container').append(template());
+    (function renderContainerTemplate(){
+      var template = Handlebars.compile($("#moxie-template-container").html());
+      var newHtml = template(filterContext);
+      $('.moxie_press_container').append(newHtml);
+    })();
 
     // get movie data and display Movie collection
     getPosts('',displayMovieCollection);
 
     // listen to controls
-    $('#mxp_filter').click(function(e){
+    $('#mxp_sort_rating').click(function(e){
       e.preventDefault();
-      filterPosts('',displayMovieCollection);
+      sortPosts('rating',filterContext.sort_rating_order,displayMovieCollection);
+      filterContext.sort_rating_order = ( filterContext.sort_rating_order == 'desc'? 'asc' : 'desc');
+      $(this).find('span').html(filterContext.sort_rating_order);
+      updateControls($(this));
       return false;
-    })
+    });
 
+    $('#mxp_sort_year').click(function(e){
+      e.preventDefault();
+      sortPosts('year',filterContext.sort_year_order,displayMovieCollection);
+      filterContext.sort_year_order = ( filterContext.sort_year_order == 'desc'? 'asc' : 'desc');
+      $(this).find('span').html(filterContext.sort_year_order);
+      updateControls($(this));
+      return false;
+    });
+
+    // rmeove other active buttons
+    function updateControls($this){
+      $('.mxp_filter').removeClass('active');
+      $this.addClass('active');
+    }
   })();
 
   function getPosts(query, callback){
@@ -214,16 +244,13 @@ $(document).ready(function(){
     });
   }
 
-  // filter functions
-  function filterPosts(query, callback){
-    // filter according to query, for now just fixed criteria: movie.rating > 2
+  // filter according to filed and order
+  function sortPosts(field, order, callback){
     var filtered = [];
-    filtered.data = myObj.data.filter(function(movie){
-      return movie.rating > 2;
-    });
+    filtered.data = myObj.data.sort(function(a, b){
+      return (order == 'asc' ? b[field] - a[field] : a[field] - b[field] );
+    })
     callback(filtered);
   }
-
-
 
 });

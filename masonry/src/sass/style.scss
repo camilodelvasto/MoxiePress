@@ -4,6 +4,8 @@
 $color1: #333;
 $color2: #49a;
 $colorBg1: rgba(240,239,238,0.9);
+$button_bg: rgba(40, 150, 80, 0.9);
+$button_bg_h: rgba(60, 170, 100, 0.9);
 
 // define sizes
 $poster_w: 144px;
@@ -45,16 +47,26 @@ $gutter : 6px;
     font-size:0.8em;
   }
 
+  .moxie-control {
+    text-align:right;
+    .mxp_button{
+      font-size:0.8em;
+    }
+  }
+
   .mxp_button {
-    background: #202E39;
+    background: $button_bg;
     color: #fff;
     border-radius: 5px;
     padding: 5px;
     margin: 10px 0;
     text-decoration: none;
+    &.active{
+      background:#f00;
+    }
   }
   .mxp_button:hover {
-    background: rgba(40, 50, 80, 0.8);
+    background: $button_bg_h;
   }
 
   #moxie-press{
@@ -216,7 +228,7 @@ $gutter : 6px;
     .mxp_grid-item{
       width:45%;
       margin:1%;
-      min-width:145px;
+      min-width:115px;
       overflow:hidden;
       .mxp_poster{
         width:100%;
