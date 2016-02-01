@@ -1,6 +1,11 @@
 <div id="moxie-press">
-  <h2>Moxie Press Movie Collection</h2>
-  <div class="moxie-control"><p><a href="#moxie-press" id="mxp_filter" class="mxp_button">filter</a></p></div>
+  <h2>{{title}}</h2>
+  <div class="moxie-control">
+    <p>sort by 
+      <a href="#moxie-press" id="mxp_sort_year" class="mxp_button mxp_filter">{{sort_year_text}}<span id="mxp_year_order">{{sort_rating_order}}</span></a>
+      <a href="#moxie-press" id="mxp_sort_rating" class="mxp_button mxp_filter">{{sort_rating_text}}<span id="mxp_rating_order">{{sort_year_order}}</span></a>
+    </p>
+  </div>
   <div class="mxp_grid-overlay"></div>
   <div class="mxp_grid" id="moxie-grid">
     {{!content}}
