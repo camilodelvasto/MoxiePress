@@ -6,6 +6,7 @@ $color2: #49a;
 $colorBg1: rgba(240,239,238,0.9);
 $button_bg: rgba(40, 150, 80, 0.9);
 $button_bg_h: rgba(60, 170, 100, 0.9);
+$button_bg_a: rgba(10, 100, 30, 0.9);
 
 // define sizes
 $poster_w: 144px;
@@ -48,7 +49,6 @@ $gutter : 6px;
   }
 
   .moxie-control {
-    text-align:right;
     .mxp_button{
       font-size:0.8em;
     }
@@ -62,7 +62,10 @@ $gutter : 6px;
     margin: 10px 0;
     text-decoration: none;
     &.active{
-      background:#f00;
+      background:$button_bg_a;
+      &:hover{
+        background:$button_bg_a;
+      }
     }
   }
   .mxp_button:hover {
@@ -126,20 +129,22 @@ $gutter : 6px;
       position:absolute;
       top:0;
       right:0;
-      width:$video_w - $poster_w - 40px;
       height: $poster_h - 40px;;
       color:#ccc;
       background:#000;
       padding:20px;
       color:#ccc;
       font-size:0.9em;
+      width:auto;
       p{
+        width:$video_w - $poster_w - 40px;
         font-size:0.9em;
         line-height:1.2em;
       }
       h3{
         font-size:1.1em;
         margin-top:0;
+        max-width:227px;
         color:#fff;
         padding-right:33px;
         position:relative;
@@ -172,6 +177,7 @@ $gutter : 6px;
     &.mxp_grid-item--gigante{
       height:$poster_h;
       width: $video_w;
+      background:#000;
       .mxp_hide-active{
         display:inline;
       }
@@ -226,9 +232,9 @@ $gutter : 6px;
       min-width:310px !important;
     }
     .mxp_grid-item{
-      width:45%;
+      width:30%;
       margin:1%;
-      min-width:115px;
+      min-width:150px;
       overflow:hidden;
       .mxp_poster{
         width:100%;
@@ -240,18 +246,11 @@ $gutter : 6px;
       min-width:300px;
       .mxp_card-info{
         right:0;
-        width:90%;
+        width:92%;
         max-width:$video_w - $poster_w - 40px;
       }
     }
   }
 }
 
-@media screen and ( max-width: 200px ){
-  .moxie_press_container{
-    .mxp_grid-item{
-
-    }
-  }
-}
 
