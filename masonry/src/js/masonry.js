@@ -4,13 +4,12 @@ File:         masonry/src/masonry.js
 What it does: consumes the service and renders movies on the page
 **************************************************************************/
 
-var myObj,initialized = false;
-var grid, myScreen = [];
-var filterContext = {};
-
-
 $(document).ready(function(){
+  // some vars we will be using
   var endpoint = moxie_press_vars.endpoint;
+  var myObj;
+  var grid, myScreen = [];
+  var filterContext = {};
 
   // initialize: get posts and displays them
   (function initialize(){
@@ -33,7 +32,7 @@ $(document).ready(function(){
     // get movie data and display Movie collection
     getPosts('',displayMovieCollection);
 
-    // listen to controls
+    // listen to buttons
     $('#mxp_sort_rating').click(function(e){
       e.preventDefault();
       sortPosts('rating',filterContext.sort_rating_order,displayMovieCollection);
@@ -52,7 +51,7 @@ $(document).ready(function(){
       return false;
     });
 
-    // rmeove other active buttons
+    // remove other active buttons
     function updateControls($this){
       $('.mxp_filter').removeClass('active');
       $this.addClass('active');
@@ -60,7 +59,7 @@ $(document).ready(function(){
   })();
 
   function getPosts(query, callback){
-    // query will be added later, if available on the shortcode
+    // query will be added later, if available
     var url = endpoint + query;
     $.ajax({
       url: url,
@@ -76,39 +75,19 @@ $(document).ready(function(){
     })
   }
 
-  // display movie collection using provided (filtered) data and movie template
+  // display movie collection using provided or filtered data
   function displayMovieCollection(data){
     //render template using movie collection from data
     var template = Handlebars.compile($("#moxie-template-movie").html());
     var newHtml = template(data);
 
+    // animate the data change, keeping previous element height to avoid scroll jump
     $('.moxie-control').fadeIn(50);
     $('#moxie-grid').css('min-height',$('#moxie-grid').height());
     $('.mxp_grid-overlay').show().fadeOut();
     $('#moxie-grid').html(template(data));
     updateGrid(); // activate masonry when finished
-
   }
-
-  // set global grid width based on screen size
-  (function getScreenSize(){
-    // call on init and whenever the screen is resized
-    setGridItemSize();
-    $(window).resize(function(){
-      setGridItemSize();
-    });
-
-    function setGridItemSize(){
-      myScreen.height = $(window).height();
-      myScreen.width = $(window).width();
-      if(myScreen.width > 475) {
-        myScreen.gridItem = 150;
-      } else {
-        myScreen.gridItem = (myScreen.width > 320? myScreen.width*45/100 : 160);
-      }
-      updateGrid();
-    }
-  })();
 
   // update width attr for all poster images depending on the screen size
   function updateImageSize(){
@@ -132,7 +111,7 @@ $(document).ready(function(){
     // create masonry object
     grid = $('.mxp_grid').masonry({
       itemSelector: '.mxp_grid-item',
-      columnWidth: myScreen.gridItem
+      columnWidth: 10 // masonry is pretty buggy, so this is the param that works best
     });
 
     transformRating();
@@ -144,11 +123,11 @@ $(document).ready(function(){
       item.toggleClass('mxp_card-active');
       if(item.hasClass('mxp_card-active')) {
         insertVideo(item.find('.mxp_card-embed'),item.data('mdbid'));
-        playThisVideo(item);
+        playThisVideo(item); // make this video auto play
       } else {
-        pauseAllVideos();
+        pauseAllVideos(); // pause all the other videos in the page
       }
-      grid.masonry('layout'); // lay out items again
+      grid.masonry('layout'); // lay the items out again
     })
 
     // click handler for each card
@@ -156,15 +135,17 @@ $(document).ready(function(){
       var item = $(this);
       if(!item.hasClass('mxp_grid-item--gigante')){ // if clicked card is already active
 
+        // play or pause videos if card is open
         pauseAllVideos();
         if (item.hasClass('.mxp_card-active')) playThisVideo(item);
 
+        // add/remove classes and recreate grid layout
         $('.mxp_grid-item').removeClass('mxp_grid-item--gigante').removeClass('mxp_card-active');
         $( this ).addClass('mxp_grid-item--gigante');
         grid.masonry('layout');
 
         // scroll to position, delay to allow grid to finish
-        setTimeout(scrollToTarget.bind(null, item), 250);
+        setTimeout(scrollToTarget.bind(null, item), 150);
       }
     }); 
   }
@@ -181,7 +162,7 @@ $(document).ready(function(){
     });      
   }
 
-  // scroll to target if grid has changed
+  // scroll to target if grid-item position has changed
   function scrollToTarget(target){
     if(target.hasClass('mxp_grid-item--gigante')){
       $('html, body').animate({
@@ -198,6 +179,7 @@ $(document).ready(function(){
     }
 
   }
+
   function pauseAllVideos(){
     // pause all youtube videos
     var players = $('.mxp_moxie-player');
@@ -215,7 +197,6 @@ $(document).ready(function(){
 
     // exit (and autoplay) if player already exists on the target
     var player = target.find('.mxp_moxie-player');
-    console.log(player.length);
     if(player != undefined && player.length > 0 ) {
       playThisVideo(player);
       return
@@ -244,7 +225,7 @@ $(document).ready(function(){
     });
   }
 
-  // filter according to filed and order
+  // filter according to field and sorting order
   function sortPosts(field, order, callback){
     var filtered = [];
     filtered.data = myObj.data.sort(function(a, b){

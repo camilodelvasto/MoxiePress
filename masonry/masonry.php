@@ -35,7 +35,7 @@ What it does: creates a masonry layout for movies created by moxie-press
     wp_localize_script( 'masonry-theme', 'moxie_press_vars', array('endpoint' => $endpoint)) ;
   }
 
-  // render the handlebars precompiled template
+  // render the handlebars precompiled templates
   function moxie_press_masonry_render_template(){
     $dir = dirname(__FILE__);
     echo '<div class="moxie_press_container">'; 
