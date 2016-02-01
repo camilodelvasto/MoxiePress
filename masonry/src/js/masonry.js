@@ -170,7 +170,7 @@ $(document).ready(function(){
   }
   function pauseAllVideos(){
     // pause all youtube videos
-    var players = $('.moxie-player');
+    var players = $('.mxp_moxie-player');
     if(players !== undefined && players.length > 0) {
       players.each(function(index,player){
         player.contentWindow.postMessage('{"event":"command","func":"' + 'pauseVideo' + '","args":""}', '*');   
@@ -183,8 +183,9 @@ $(document).ready(function(){
     var mdb_api = '4b94e36814dcea14914304d5f814330c';
     var url = 'https://api.themoviedb.org/3/movie/' + mdbid + '/videos?api_key=' + mdb_api;
 
-    // exit if player already exists on the target
+    // exit (and autoplay) if player already exists on the target
     var player = target.find('.mxp_moxie-player');
+    console.log(player.length);
     if(player != undefined && player.length > 0 ) {
       playThisVideo(player);
       return
@@ -203,7 +204,7 @@ $(document).ready(function(){
       cache: true,
       dataType: 'json',
       success: function(videos){
-        var embed = "<style>.embed-container { position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden; max-width: 100%; } .embed-container iframe, .embed-container object, .embed-container embed { position: absolute; top: 0; left: 0; width: 100%; height: 100%; }</style><div class='moxie-embed-container' id='player-" + mdbid + "'><iframe class='moxie-player' id='moxie-player-"+mdbid+"' src='http://www.youtube.com/embed/" + videos.results[0].key + "?enablejsapi=1&version=3&playerapiid=ytplayer&rel=0&amp;autoplay=1' frameborder='0' width='100%' height='230' allowfullscreen='true' allowscriptaccess='always'></iframe></div>";
+        var embed = "<style>.embed-container { position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden; max-width: 100%; } .embed-container iframe, .embed-container object, .embed-container embed { position: absolute; top: 0; left: 0; width: 100%; height: 100%; }</style><div class='moxie-embed-container' id='player-" + mdbid + "'><iframe class='mxp_moxie-player' id='moxie-player-"+mdbid+"' src='http://www.youtube.com/embed/" + videos.results[0].key + "?enablejsapi=1&version=3&playerapiid=ytplayer&rel=0&amp;autoplay=1' frameborder='0' width='100%' height='230' allowfullscreen='true' allowscriptaccess='always'></iframe></div>";
         if(videos.results !== undefined && videos.results.length > 0) target.html(embed);
         else target.html('<p>Sorry, we found no videos for this movie</p>');
       },
