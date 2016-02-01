@@ -62,8 +62,10 @@ $gutter : 6px;
     overflow:hidden;
     float: left;
     margin: 3px;
-    background:#f0f0f0;
     position: relative;
+    -webkit-overflow-scrolling: touch;
+    scroll-behavior: smooth; // Added in from answer from Felix
+    overflow-x: scroll;
     .mxp_poster{
       position:absolute;
       left:0;
@@ -89,7 +91,7 @@ $gutter : 6px;
       position:absolute;
       top:0;
       right:0;
-      width:$video_w - $poster_w - 40px;;
+      width:$video_w - $poster_w - 40px;
       height: $poster_h - 40px;;
       color:#ccc;
       background:#000;
@@ -125,6 +127,7 @@ $gutter : 6px;
       top:$poster_h - $gutter;
       height:$video_h;
       width:$video_w;
+      max-width:100%;
       color:#ccc;
       p{
         padding:20px;
@@ -173,7 +176,7 @@ $gutter : 6px;
   }
 }
 
-@media screen and (max-width:480px){
+@media screen and (max-width:475px){
   .moxie_press_container{
     .mxp_hide-desktop{
       display:block;
@@ -181,7 +184,41 @@ $gutter : 6px;
     .mxp_hide-mobile{
       display:none;
     }
+    #moxie-press{
+      min-width:310px;
+    }
+    .mxp_grid{
+      min-width:310px !important;
+    }
+    .mxp_grid-item{
+      width:45%;
+      margin:1%;
+      min-width:145px;
 
+      overflow:hidden;
+      background:#f00;
+      .mxp_poster{
+        width:100%;
+        max-width:204px;
+      }
+    }
+    .mxp_grid-item--gigante{
+      width:92% !important;
+      min-width:300px;
+      .mxp_card-info{
+        right:0;
+        width:90%;
+        max-width:$video_w - $poster_w - 40px;
+      }
+    }
+  }
+}
+
+@media screen and ( max-width: 200px ){
+  .moxie_press_container{
+    .mxp_grid-item{
+
+    }
   }
 }
 

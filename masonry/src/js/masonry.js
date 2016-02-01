@@ -5,7 +5,7 @@ What it does: consumes the service and renders movies on the page
 **************************************************************************/
 
 var myObj,initialized = false;
-var grid;
+var grid, myScreen = [];
 
 $(document).ready(function(){
   var endpoint = moxie_press_vars.endpoint;
@@ -60,18 +60,52 @@ $(document).ready(function(){
 
   }
 
+  (function getScreenSize(){
+      myScreen.height = $(window).height();
+      myScreen.width = $(window).width();
+      if(myScreen.width > 475) {
+        myScreen.gridItem = 150;
+      }
+      else { 
+        myScreen.gridItem = myScreen.width*45/100;
+      }
+    $(window).resize(function(){
+      myScreen.height = $(window).height();
+      myScreen.width = $(window).width();
+      if(myScreen.width > 475) {
+        myScreen.gridItem = 150;
+      } else {
+        myScreen.gridItem = (myScreen.width > 320? myScreen.width*45/100 : 160);
+      }
+      updateGrid();
+    });
+  })();
+
+  // update width attr for all poster images depending on the screen size
+  function updateImageSize(){
+    $('.mxp_poster img').each(function(index, item){
+      var parentWidth;
+      if(myScreen.width > 475) parentWidth = 150;
+      else parentWidth = $(item).parents('.mxp_poster').width();
+      $(item).attr('width',parentWidth + 10);
+    });      
+  }
+
   function updateGrid(){
     // layout items again and define click handler
     if (grid !== undefined) {
       grid.masonry('destroy');
       grid.unbind('click');
     }
+
+    updateImageSize();
+
     grid = $('.mxp_grid').masonry({
       itemSelector: '.mxp_grid-item',
-      columnWidth: 150
+      columnWidth: myScreen.gridItem
     });
 
-    transformRating();
+    transformRating(); // transform rating number into stars
     function transformRating(){
       $('.mxp_rating-transform').each(function(index, item){
         var rating = $(item).html().substr(1,1);
@@ -87,7 +121,7 @@ $(document).ready(function(){
     $('.mxp_card-trigger-trailer').click(function(e){
       e.preventDefault();
       var item = $(this).parents('.mxp_grid-item');
-      item.animate().toggleClass('mxp_card-active');
+      item.toggleClass('mxp_card-active');
       if(item.hasClass('mxp_card-active')) {
         insertVideo(item.find('.mxp_card-embed'),item.data('mdbid'));
         playThisVideo(item);
@@ -165,7 +199,7 @@ $(document).ready(function(){
       dataType: 'json',
       success: function(videos){
         var embed = "<style>.embed-container { position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden; max-width: 100%; } .embed-container iframe, .embed-container object, .embed-container embed { position: absolute; top: 0; left: 0; width: 100%; height: 100%; }</style><div class='moxie-embed-container' id='player-" + mdbid + "'><iframe class='moxie-player' id='moxie-player-"+mdbid+"' src='http://www.youtube.com/embed/" + videos.results[0].key + "?enablejsapi=1&version=3&playerapiid=ytplayer&rel=0&amp;autoplay=1' frameborder='0' width='100%' height='230' allowfullscreen='true' allowscriptaccess='always'></iframe></div>";
-        if(videos.results !== undefined && videos.results.length > 0) target.animate().html(embed);
+        if(videos.results !== undefined && videos.results.length > 0) target.html(embed);
         else target.html('<p>Sorry, we found no videos for this movie</p>');
       },
       error: function(err){
