@@ -47,3 +47,14 @@ What it does: creates a masonry layout for movies created by moxie-press
     echo '</script>'; 
     echo '</div>';
   }
+
+  // prevent user to zoom while using the plugin
+  add_action('wp_head','hook_disable_zoom');
+
+  function hook_disable_zoom() {
+    $output="<meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0' name='viewport' />";
+    echo $output;
+  }
+
+  
+
