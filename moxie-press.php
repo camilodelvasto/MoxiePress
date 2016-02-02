@@ -128,7 +128,7 @@ Text Domain:  moxie-press
 
       <p>
         <label for="moxie_press_description"><b><?php _e( 'Description', 'moxie-press' ); ?></b><br>
-        <i>Short description, restricted to 300 chars</i></label><br>
+        <i>Short description, restricted to 240 chars</i></label><br>
         <textarea name="moxie_press_description" id="moxie_press_description" cols="50" rows="10"><?php echo moxie_press_get_meta( 'moxie_press_description' ); ?></textarea>
       </p>
 
@@ -152,7 +152,7 @@ Text Domain:  moxie-press
       if ( isset( $_POST['moxie_press_year'] ) )
         update_post_meta( $post_id, 'moxie_press_year', esc_attr( $_POST['moxie_press_year'] ) );
       if ( isset( $_POST['moxie_press_description'] ) )
-        update_post_meta( $post_id, 'moxie_press_description', esc_attr( substr($_POST['moxie_press_description'], 0, 300 ) ) );
+        update_post_meta( $post_id, 'moxie_press_description', esc_attr( substr($_POST['moxie_press_description'], 0, 240 ) ) );
       if ( isset( $_POST['moxie_press_mdbid'] ) )
         update_post_meta( $post_id, 'moxie_press_mdbid', esc_attr( $_POST['moxie_press_mdbid'] ) );
     }
