@@ -18,7 +18,7 @@ The plugin can be further enhanced by:
 - Pagination and loading of pages on scroll
 - Pre compilation of handlebar templates for production
 - Clearing expired transients
-- Improve responsiveness: make the grid fluid
+- Make original image size adapt to card size
 
 ##For developers only
 

@@ -18,7 +18,6 @@ $(document).ready(function(){
     filterContext = {
       sort_rating_order:  'desc',
       sort_year_order:    'desc',
-      title:              'Moxie Press Movie Collection',
       sort_year_text:     'year: ',
       sort_rating_text:   'rating: '
     };
