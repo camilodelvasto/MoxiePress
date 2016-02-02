@@ -229,6 +229,9 @@ $video_h: 282px;
   .moxie_press_container{
     .mxp_grid-item--gigante{
       min-width:340px !important;
+      .mxp_card-info{
+        font-size:0.85em;
+      }
     }
   }
 }
