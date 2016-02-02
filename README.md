@@ -1,3 +1,5 @@
+![](http://res.cloudinary.com/startics/image/upload/v1454371769/moxie-press-screenshot_dimhdm.png)
+
 #MoxiePress
 
 A modern plugin for WordPress that will display your movie collection using a shortcode: `[moxie-press]`.
@@ -15,6 +17,8 @@ The plugin can be further enhanced by:
 - Lazy loading of images
 - Pagination and loading of pages on scroll
 - Pre compilation of handlebar templates for production
+- Clearing expired transients
+- Improve responsiveness: make the grid fluid
 
 ##For developers only
 
