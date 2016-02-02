@@ -236,11 +236,13 @@ $video_h: 282px;
   .moxie_press_container{
     .mxp_grid-item,.mxp_grid-sizer{
       min-width:300px;
-      height:$poster_h + 140px;
+      height:$poster_h + 180px;
       background:#000;
+      max-height:$poster_h + 180px;
+      overflow:hidden;
       .mxp_poster{
-        height:$poster_h + 140px;
-        max-height:$poster_h + 140px;
+        height:$poster_h + 180px;
+        max-height:$poster_h + 180px;
 
       }
     }
@@ -248,17 +250,24 @@ $video_h: 282px;
       width:300px !important;
       min-width:0 !important;
       z-index:5001;
-      max-height:$poster_h + 200px;
+      max-height:$poster_h + 180px;
+      overflow:hidden;
       .mxp_poster{
         max-width:300px !important;
+        height:300px;
       }
       .mxp_card-info{
         background:rgba(0,0,0,0.8);
-        top:150px;
+        top:140px;
         width:300px !important;
         min-width:0 !important;
+        height:250px !important;
       }
       &.mxp_card-active{
+        max-height:$poster_h + 2000px;
+        .mxp_card-info{
+          top:0;
+        }
       }
     }
   }
