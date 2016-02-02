@@ -145,7 +145,7 @@ $(document).ready(function(){
         grid.masonry('layout');
 
         // scroll to position, delay to allow grid to finish
-        setTimeout(scrollToTarget.bind(null, item), 150);
+        setTimeout(scrollToTarget.bind(null, item), 250);
       }
     }); 
   }
