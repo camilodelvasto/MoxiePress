@@ -1,4 +1,4 @@
-![](http://res.cloudinary.com/startics/image/upload/v1454371769/moxie-press-screenshot_dimhdm.png)
+![](http://res.cloudinary.com/startics/image/upload/c_scale,w_629/v1454420140/Screen_Shot_2016-02-02_at_8.35.16_AM_js5anw.jpg)
 
 #MoxiePress
 
