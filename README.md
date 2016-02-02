@@ -27,7 +27,7 @@ The plugin uses the following files:
 - **moxie-press-php**: main file, custom post type and field definitions and calls to methods on the other files
 - **json-api.php**: rewrite tags and redirection rules, wp query based on arguments, caching
 - **shortcode.php**: template (handlebars) inclusion, assets inclusion of styles and scripts for the current theme, masonry
-- masonry folder: sass, js files, vendor scripts (masonry) and handlebar templates
+- **masonry folder**: sass, js files, vendor scripts (masonry) and handlebar templates
 
 Gulpfile.js is included, but you can use grunt or whatever for preprocessing.
 
