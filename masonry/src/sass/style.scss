@@ -254,7 +254,7 @@ $video_h: 282px;
       overflow:hidden;
       .mxp_poster{
         max-width:300px !important;
-        height:300px;
+        max-height:$poster_h + 180px;
       }
       .mxp_card-info{
         background:rgba(0,0,0,0.8);
@@ -267,6 +267,9 @@ $video_h: 282px;
         max-height:$poster_h + 2000px;
         .mxp_card-info{
           top:0;
+        }
+        .mxp_card-embed{
+          top:260px;
         }
       }
     }
