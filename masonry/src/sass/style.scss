@@ -235,20 +235,26 @@ $video_h: 282px;
 @media screen and (max-width:360px){
   .moxie_press_container{
     .mxp_grid-item,.mxp_grid-sizer{
-      min-width:150px;
-      height:$poster_h - 40px;
+      min-width:300px;
+      height:$poster_h + 140px;
       background:#000;
+      .mxp_poster{
+        height:$poster_h + 140px;
+        max-height:$poster_h + 140px;
+
+      }
     }
     .mxp_grid-item--gigante{
-      display:block;
       width:300px !important;
       min-width:0 !important;
       z-index:5001;
-      height:270px;
+      max-height:$poster_h + 200px;
       .mxp_poster{
-        display:none;
+        max-width:300px !important;
       }
       .mxp_card-info{
+        background:rgba(0,0,0,0.8);
+        top:150px;
         width:300px !important;
         min-width:0 !important;
       }
