@@ -86,6 +86,7 @@ $(document).ready(function(){
     $('#moxie-grid').css('min-height',$('#moxie-grid').height());
     $('.mxp_grid-overlay').show().fadeOut();
     $('#moxie-grid').html(template(data));
+    $('#moxie-grid').prepend('<div class="mxp_grid-sizer"></div>');
     updateGrid(); // activate masonry when finished
   }
 
@@ -95,7 +96,7 @@ $(document).ready(function(){
       var parentWidth;
       if(myScreen.width > 475) parentWidth = 150;
       else parentWidth = $(item).parents('.mxp_poster').width();
-      $(item).attr('width',parentWidth + 10);
+//      $(item).attr('width',parentWidth + 10);
     });      
   }
 
@@ -111,7 +112,8 @@ $(document).ready(function(){
     // create masonry object
     grid = $('.mxp_grid').masonry({
       itemSelector: '.mxp_grid-item',
-      columnWidth: 10 // masonry is pretty buggy, so this is the param that works best
+      columnWidth: '.mxp_grid-sizer',
+      percentPosition: true
     });
 
     transformRating();
