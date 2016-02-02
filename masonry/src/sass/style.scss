@@ -73,153 +73,153 @@ $video_h: 282px;
   .mxp_grid-item {
     height: $poster_h;
     float: left;
-    background: #D26;
+    background: #000;
     border: 4px solid #fff;
     border-color: #fff;
 
     min-width:170px;
     &:hover {
-    cursor: pointer;
-  }
-
-  a.mxp_card-trigger-trailer{
-    color:#fff;
-  }
-
-  .mxp_poster{
-    position:absolute;
-    left:0;
-    top:0;
-    width:100%;
-    height:100%;
-    max-height:$poster_h;
-    overflow:hidden;
-    background:#c00;
-  }
-  .mxp_overlay{
-    position:absolute;
-    top:0;
-    left:0;
-    background:rgba(0,0,0,0.2);
-    z-index:1000;
-    width:100%;
-    height:100%;
-    &:hover{
-      background:transparent;
+      cursor: pointer;
     }
-  }
-
-  .mxp_grid-item--gigante { 
-    width:  60%; 
-    min-width:510px;
-    background:#000;
-    .mxp_hide-active{
-      display:inline;
+    a.mxp_card-trigger-trailer{
+      color:#fff;
     }
-    .mxp_show-active{
-      display:none;
+
+    .mxp_poster{
+      position:absolute;
+      left:0;
+      top:0;
+      width:100%;
+      height:100%;
+      max-height:$poster_h;
+      overflow:hidden;
+      background:#000;
     }
     .mxp_overlay{
-      display:none;
-    }
-    .mxp_poster{
-      max-width:200px;
-    }
-    .mxp_card-info{
-      display:block !important;
-      height:100% !important;
-      min-width:310px;
+      position:absolute;
+      top:0;
+      left:0;
+      background:rgba(0,0,0,0.2);
+      z-index:1000;
+      width:100%;
+      height:100%;
       &:hover{
-        cursor: initial;
+        background:transparent;
       }
     }
-    &.mxp_card-active{
-      height:$video_h + $poster_h;
+
+    &.mxp_grid-item--gigante { 
+      width:  60%; 
+      min-width:510px;
+      background:#000;
       .mxp_hide-active{
-        display:none;
-      }
-      .mxp_show-active{
         display:inline;
       }
-      .mxp_card-embed{
+      .mxp_show-active{
+        display:none;
+      }
+      .mxp_overlay{
+        display:none;
+      }
+      .mxp_poster{
+        max-width:200px;
+      }
+      .mxp_card-info{
         display:block !important;
+        height:100% !important;
+        min-width:310px;
+        &:hover{
+          cursor: initial;
+        }
+      }
+      &.mxp_card-active{
+        height:$video_h + $poster_h;
+        .mxp_hide-active{
+          display:none;
+        }
+        .mxp_show-active{
+          display:inline;
+        }
+        .mxp_card-embed{
+          display:block !important;
+        }
       }
     }
-  }
 
-  .mxp_card-info{
-    display:none;
-    position:absolute;
-    top:0;
-    right:0;
-    height: $poster_h - 40px;;
-    color:#ccc;
-    background:#000;
-    padding:20px;
-    color:#ccc;
-    font-size:0.9em;
-    width:70%;
-    max-width:340px;
-    p{
-      font-size:1.05em;
-      line-height:1.2em;
-    }
-    h3{
-      font-size:1.1em;
-      margin-top:0;
-      max-width:310px;
-      color:#fff;
-      padding-right:33px;
-      position:relative;
-      .mxp_year{
-        color:#ccc;
-      }
-    }
-    .mxp_rating-transform{
+    .mxp_card-info{
+      display:none;
       position:absolute;
-      right:0;
       top:0;
-      font-size:0.6em;
-      text-align:right;
-    }
-  }
-  .mxp_button {
-    background: $button_bg;
-    color: #fff;
-    border-radius: 5px;
-    padding: 5px;
-    margin: 10px 0;
-    text-decoration: none;
-    &.active{
-      background:$button_bg_a;
-      &:hover{
-        background:$button_bg_a;
+      right:0;
+      height: $poster_h - 40px;;
+      color:#ccc;
+      background:#000;
+      padding:20px;
+      color:#ccc;
+      font-size:0.9em;
+      width:70%;
+      max-width:340px;
+      p{
+        font-size:1.05em;
+        line-height:1.2em;
+      }
+      h3{
+        font-size:1.1em;
+        margin-top:0;
+        max-width:310px;
+        color:#fff;
+        padding-right:33px;
+        position:relative;
+        .mxp_year{
+          color:#ccc;
+        }
+      }
+      .mxp_rating-transform{
+        position:absolute;
+        right:0;
+        top:0;
+        font-size:0.6em;
+        text-align:right;
       }
     }
-  }
-  .mxp_button:hover {
-    background: $button_bg_h;
-  }
+    .mxp_button {
+      background: $button_bg;
+      color: #fff;
+      border-radius: 5px;
+      padding: 5px;
+      margin: 10px 0;
+      text-decoration: none;
+      &.active{
+        background:$button_bg_a;
+        &:hover{
+          background:$button_bg_a;
+        }
+      }
+    }
+    .mxp_button:hover {
+      background: $button_bg_h;
+    }
 
-  #moxie-press{
-    position:relative;
-  }
+    #moxie-press{
+      position:relative;
+    }
 
-  #moxie-control{
-    display:none;
-  }
-  .mxp_card-embed{
-    display:none;
-    background:#000;
-    position:absolute;
-    top:$poster_h - 10px;
-    height:$video_h;
-    width:100%;
-    color:#ccc;
-    border-top:10px solid #000;
-    p{
-      padding:20px;
-      font-size:0.9em;
+    #moxie-control{
+      display:none;
+    }
+    .mxp_card-embed{
+      display:none;
+      background:#000;
+      position:absolute;
+      top:$poster_h - 10px;
+      height:$video_h;
+      width:100%;
+      color:#ccc;
+      border-top:10px solid #000;
+      p{
+        padding:20px;
+        font-size:0.9em;
+      }
     }
   }
 }
@@ -237,15 +237,22 @@ $video_h: 282px;
     .mxp_grid-item,.mxp_grid-sizer{
       min-width:150px;
       height:$poster_h - 40px;
-      border:0;
+      background:#000;
     }
     .mxp_grid-item--gigante{
-      width:300px;
+      width:300px !important;
+      min-width:0 !important;
+      z-index:5001;
+      height:240px;
+      .mxp_poster{
+        display:none;
+      }
       .mxp_card-info{
-        width:300px;
-        min-width:0;
+        width:300px !important;
+        min-width:0 !important;
+      }
+      &.mxp_card-active{
       }
     }
   }
 }
-
