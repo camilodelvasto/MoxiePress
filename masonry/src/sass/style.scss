@@ -228,12 +228,13 @@ $video_h: 282px;
 @media screen and (max-width:535px){
   .moxie_press_container{
     .mxp_grid-item--gigante{
-      min-width:340px;
+      min-width:340px !important;
     }
   }
 }
 
-@media screen and (max-width:360px){
+
+@media screen and (max-width:340px){
   .moxie_press_container{
     .mxp_grid-item,.mxp_grid-sizer{
       width:100%;
