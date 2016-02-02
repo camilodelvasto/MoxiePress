@@ -240,10 +240,11 @@ $video_h: 282px;
       background:#000;
     }
     .mxp_grid-item--gigante{
+      display:block;
       width:300px !important;
       min-width:0 !important;
       z-index:5001;
-      height:260px;
+      height:270px;
       .mxp_poster{
         display:none;
       }
