@@ -40,6 +40,31 @@ $video_h: 282px;
 
 .moxie_press_container{
 
+  .mxp_button {
+    background: $button_bg;
+    color: #fff;
+    border-radius: 5px;
+    padding: 5px;
+    margin: 10px 0;
+    text-decoration: none;
+    &.active{
+      background:$button_bg_a;
+      &:hover{
+        background:$button_bg_a;
+      }
+    }
+  }
+  .mxp_button:hover {
+    background: $button_bg_h;
+  }
+
+  #moxie-press{
+    position:relative;
+  }
+
+  #moxie-control{
+    display:none;
+  }
   .mxp_hide-desktop{
     display:none;
   }
@@ -182,31 +207,7 @@ $video_h: 282px;
         text-align:right;
       }
     }
-    .mxp_button {
-      background: $button_bg;
-      color: #fff;
-      border-radius: 5px;
-      padding: 5px;
-      margin: 10px 0;
-      text-decoration: none;
-      &.active{
-        background:$button_bg_a;
-        &:hover{
-          background:$button_bg_a;
-        }
-      }
-    }
-    .mxp_button:hover {
-      background: $button_bg_h;
-    }
 
-    #moxie-press{
-      position:relative;
-    }
-
-    #moxie-control{
-      display:none;
-    }
     .mxp_card-embed{
       display:none;
       background:#000;
