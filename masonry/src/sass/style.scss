@@ -1,20 +1,13 @@
 /* define vars for this theme */
 
 // define color palette
-$color1: #333;
-$color2: #49a;
-$colorBg1: rgba(240,239,238,0.9);
 $button_bg: rgba(40, 150, 80, 0.9);
 $button_bg_h: rgba(60, 170, 100, 0.9);
 $button_bg_a: rgba(10, 100, 30, 0.9);
 
 // define sizes
-$poster_w: 144px;
 $poster_h: 240px;
-$video_w: 444px;
 $video_h: 282px;
-
-$gutter : 6px;
 
 
 * { box-sizing: border-box; }
@@ -39,8 +32,28 @@ $gutter : 6px;
   width:100%;
   z-index:2000;
 }
-/* standard styles for the plugin on desktop or bigger screens */
+#moxie-grid{
+ transition: opacity .25s ease-in-out;
+ -moz-transition: opacity .25s ease-in-out;
+ -webkit-transition: opacity .25s ease-in-out;
+}
+
 .moxie_press_container{
+
+  .mxp_hide-desktop{
+    display:none;
+  }
+
+  .mxp_small{
+    font-size:0.8em;
+  }
+
+  .moxie-control {
+    .mxp_button{
+      font-size:0.8em;
+    }
+  }
+
     /* clearfix */
   .mxp_grid:after {
     content: '';
@@ -52,6 +65,9 @@ $gutter : 6px;
   .mxp_grid-item {
     width: 20%;
     min-width:170px;
+    -webkit-overflow-scrolling: touch;
+    scroll-behavior: smooth;
+    overflow-x: scroll;
   }
 
   .mxp_grid-item {
@@ -69,8 +85,6 @@ $gutter : 6px;
   a.mxp_card-trigger-trailer{
     color:#fff;
   }
-
-}
 
   .mxp_poster{
     position:absolute;
@@ -133,45 +147,42 @@ $gutter : 6px;
     }
   }
 
-
-    .mxp_card-info{
-      display:none;
-      position:absolute;
-      top:0;
-      right:0;
-      height: $poster_h - 40px;;
-      color:#ccc;
-      background:#000;
-      padding:20px;
-      color:#ccc;
-      font-size:0.9em;
-      width:70%;
-      max-width:340px;
-      p{
-        font-size:1.05em;
-        line-height:1.2em;
-      }
-      h3{
-        font-size:1.1em;
-        margin-top:0;
-        max-width:310px;
-        color:#fff;
-        padding-right:33px;
-        position:relative;
-        .mxp_year{
-          color:#ccc;
-        }
-      }
-      .mxp_rating-transform{
-        position:absolute;
-        right:0;
-        top:0;
-        font-size:0.6em;
-        text-align:right;
+  .mxp_card-info{
+    display:none;
+    position:absolute;
+    top:0;
+    right:0;
+    height: $poster_h - 40px;;
+    color:#ccc;
+    background:#000;
+    padding:20px;
+    color:#ccc;
+    font-size:0.9em;
+    width:70%;
+    max-width:340px;
+    p{
+      font-size:1.05em;
+      line-height:1.2em;
+    }
+    h3{
+      font-size:1.1em;
+      margin-top:0;
+      max-width:310px;
+      color:#fff;
+      padding-right:33px;
+      position:relative;
+      .mxp_year{
+        color:#ccc;
       }
     }
-
-
+    .mxp_rating-transform{
+      position:absolute;
+      right:0;
+      top:0;
+      font-size:0.6em;
+      text-align:right;
+    }
+  }
   .mxp_button {
     background: $button_bg;
     color: #fff;
@@ -197,68 +208,20 @@ $gutter : 6px;
   #moxie-control{
     display:none;
   }
-
-      .mxp_card-embed{
-      display:none;
-      background:#000;
-      position:absolute;
-      top:$poster_h - 10px;
-      height:$video_h;
-      width:100%;
-      color:#ccc;
-      border-top:10px solid #000;
-      p{
-        padding:20px;
-        font-size:0.9em;
-      }
-    }
-
-
-
-}
-
-.moxie_press_containerx{
-
-  .mxp_hide-desktop{
+  .mxp_card-embed{
     display:none;
-  }
-
-  .mxp_small{
-    font-size:0.8em;
-  }
-
-  .moxie-control {
-    .mxp_button{
-      font-size:0.8em;
+    background:#000;
+    position:absolute;
+    top:$poster_h - 10px;
+    height:$video_h;
+    width:100%;
+    color:#ccc;
+    border-top:10px solid #000;
+    p{
+      padding:20px;
+      font-size:0.9em;
     }
   }
-
-
-
-  #moxie-grid{
-   transition: opacity .25s ease-in-out;
-   -moz-transition: opacity .25s ease-in-out;
-   -webkit-transition: opacity .25s ease-in-out;
-  }
-  /* ---- grid ---- */
-
-  /* ---- grid-item ---- */
-  .mxp_grid-item {
-    width: $poster_w;
-    height: $poster_h;
-    overflow:hidden;
-    float: left;
-    margin: 3px;
-    position: relative;
-    -webkit-overflow-scrolling: touch;
-    scroll-behavior: smooth; // Added in from answer from Felix
-    overflow-x: scroll;
-
-    &.mxp_grid-item--gigante{
-
-      }
-    }
-
 }
 
 @media screen and (max-width:535px){
