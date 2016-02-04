@@ -18,7 +18,8 @@ The plugin can be further enhanced by:
 - Pagination and loading of pages on scroll
 - Pre compilation of handlebar templates for production
 - Clearing expired transients
-- Make original image size adapt to card size
+- Making original image size adapt to card size
+- Using backbone, Angular or another framework to separate views from the model and improve re usability
 
 ##For developers only
 
